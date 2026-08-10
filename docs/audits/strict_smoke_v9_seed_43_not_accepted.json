@@ -1,0 +1,56 @@
+{
+  "run": "strict_smoke_v9_seed_43",
+  "date": "2026-08-04",
+  "stage": "smoke",
+  "valid_as_diagnostic_evidence": true,
+  "accepted_for_deployment": false,
+  "formal_training_allowed": false,
+  "all_targets_passed": false,
+  "leakage_audit": {
+    "passed": true,
+    "test_used_for_selection": false,
+    "preprocessing_fit": "train_only",
+    "audited_folds": 15
+  },
+  "metrics": {
+    "soc": {
+      "mae": 0.0036242358029026493,
+      "coverage_within_0_01": 0.8976666666666666,
+      "passed": false
+    },
+    "soe": {
+      "mae": 0.0038799044513215947,
+      "coverage_within_0_01": 0.8934444444444445,
+      "passed": false
+    },
+    "soh": {
+      "mae": 0.0576540522604467,
+      "coverage_within_0_01": 0.2809111950298453,
+      "passed": false
+    },
+    "rul_cycles": {
+      "mae_cycles": 309.734972705529,
+      "coverage_within_1_cycle": 0.005074365704286964,
+      "passed": false
+    },
+    "sot_c": {
+      "mae_c": 0.4484996894178859,
+      "coverage_within_10pct_label": 0.9994444444444445,
+      "passed": true
+    }
+  },
+  "failure_evidence": {
+    "soc_p90_absolute_error": 0.010146886185737213,
+    "soe_p90_absolute_error": 0.010419602101348792,
+    "soh_worst_fold_mae": 0.093127,
+    "rul_matr_mae_cycles": 93.483653,
+    "rul_oxford_mae_cycles": 2184.644894,
+    "rul_cross_source_scale_mismatch": true
+  },
+  "minimum_next_steps": [
+    "Add transparent causal physics candidates for SOC and SOE using cumulative charge or energy divided by the fixed pre-cycle reference; keep them validation-selected and explicitly identify their label-definition relationship.",
+    "Diagnose SOH cell normalization and domain shift by held-out MATR policy before adding model complexity; do not use current or future target capacity as an input.",
+    "Separate Oxford and MATR RUL label scales or convert them to a common physical-cycle definition, then retain only observed EOL rows and rerun strict held-out validation.",
+    "Do not start formal training until a new smoke run passes every target acceptance gate."
+  ]
+}

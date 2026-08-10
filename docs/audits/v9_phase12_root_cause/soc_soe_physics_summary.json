@@ -1,0 +1,61 @@
+{
+  "targets": {
+    "soc": {
+      "model_absolute_error": {
+        "count": 9000,
+        "mean": 0.0036242358029026046,
+        "std": 0.005045830257867153,
+        "p05": 3.851644744050709e-05,
+        "median": 0.0014038529234655,
+        "p95": 0.013690793878166055,
+        "min": 0.0,
+        "max": 0.0754532877527656
+      },
+      "physical_absolute_error": {
+        "count": 9000,
+        "mean": 3.05918325581615e-17,
+        "std": 3.365996587378908e-17,
+        "p05": 0.0,
+        "median": 1.8214596497756474e-17,
+        "p95": 9.194034422677078e-17,
+        "min": 0.0,
+        "max": 1.1102230246251565e-16
+      },
+      "physical_within_0_01_coverage": 1.0,
+      "causal_inputs": [
+        "current-or-past cumulative counter",
+        "fixed nominal or previous completed cycle reference"
+      ],
+      "uses_future_information": false
+    },
+    "soe": {
+      "model_absolute_error": {
+        "count": 9000,
+        "mean": 0.0038799044513215513,
+        "std": 0.007052186611038669,
+        "p05": 1.261250111347689e-05,
+        "median": 0.00144576155551455,
+        "p95": 0.014737543086220025,
+        "min": 0.0,
+        "max": 0.2103661914934851
+      },
+      "physical_absolute_error": {
+        "count": 9000,
+        "mean": 1.2969031699110199e-05,
+        "std": 0.0009779258253140456,
+        "p05": 0.0,
+        "median": 2.7755575615628914e-17,
+        "p95": 1.1102230246251565e-16,
+        "min": 0.0,
+        "max": 0.08833258636264113
+      },
+      "physical_within_0_01_coverage": 0.9997777777777778,
+      "causal_inputs": [
+        "current-or-past cumulative counter",
+        "fixed nominal or previous completed cycle reference"
+      ],
+      "uses_future_information": false
+    }
+  },
+  "group_count": 89
+}

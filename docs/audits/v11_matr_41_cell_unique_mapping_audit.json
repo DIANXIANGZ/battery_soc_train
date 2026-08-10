@@ -1,0 +1,80 @@
+{
+  "audit": "v11_matr_41_cell_unique_mapping_from_saved_canonical_list",
+  "status": "PASS_MAPPING_ONLY_PROVENANCE_UNCHANGED",
+  "scope": "Read-only unique mapping of 36 Supplementary Table 9 candidates and 5 known early-terminated Batch1 cells using only the previously saved canonical list entity",
+  "binding_decision": {
+    "hierarchical_binding_accepted": true,
+    "composite_official_source_binding_5_of_5": true,
+    "canonical_url_contains_verified_project_id": "5c48dd2bc625d700019f3204",
+    "canonical_url_contains_verified_batch_id": "5c86c0b5fa2ede00015ddf67",
+    "child_object_project_id_required": false,
+    "child_object_batch_id_required": "5c86c0b5fa2ede00015ddf67"
+  },
+  "saved_entity": {
+    "path": "tmp/v11_canonical_test_list/list.body",
+    "canonical_url": "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests",
+    "http_status": 200,
+    "content_type": "application/json",
+    "etag": "d35bc98e6af5807aa10da836d5105d1a",
+    "last_modified": "Wed, 12 Feb 2020 14:54:53 GMT",
+    "byte_count": 463120,
+    "sha256": "d5b26dfba5885d4ababc0f2de3330761bff6a72b24b9d3edff668895d5e02cc8",
+    "fresh_network_request_made": false,
+    "parseable_json": true,
+    "top_level_type": "array",
+    "object_count": 46
+  },
+  "target_sources": {
+    "supplementary_table9_candidates": "docs/audits/v11_matr_cycle_life_per_cell.csv",
+    "known_early_terminated_cell_to_channel": {
+      "b1c8": 13,
+      "b1c10": 19,
+      "b1c12": 21,
+      "b1c13": 22,
+      "b1c22": 31
+    }
+  },
+  "mapping_results": {
+    "detail_path": "docs/audits/v11_matr_41_cell_unique_mapping.csv",
+    "target_count": 41,
+    "table9_candidate_count": 36,
+    "known_early_terminated_count": 5,
+    "zero_match_count": 0,
+    "unique_match_count": 41,
+    "multiple_match_count": 0,
+    "distinct_test_id_count": 41,
+    "distinct_channel_count": 41,
+    "distinct_barcode_count": 41,
+    "cross_set_test_id_overlap_count": 0,
+    "cross_set_channel_overlap_count": 0,
+    "cross_set_barcode_overlap_count": 0,
+    "objects_with_expected_batch_id": 41,
+    "objects_with_wrong_batch_id": 0,
+    "table9_candidate_set_exact_match": true,
+    "known_early_terminated_cell_set_exact_match": true,
+    "known_early_terminated_channel_set_exact_match": true,
+    "all_mapping_rows_pass": true
+  },
+  "state_after_audit": {
+    "official_continuation_cells": 5,
+    "official_cycle_life_eol_cells": 0,
+    "observed_eol_crossing_cells": 0,
+    "candidate_cells_still_right_censored": 36,
+    "known_early_terminated_cells_still_right_censored": 5,
+    "v11_valid_for_training": false,
+    "provenance_changed": false
+  },
+  "prohibited_actions_confirmed": {
+    "network_refetch": false,
+    "detail_endpoint_called": false,
+    "file_endpoint_called": false,
+    "download_endpoint_called": false,
+    "raw_csv_or_arbin_accessed": false,
+    "v11_or_data_changed": false,
+    "labels_or_provenance_changed": false,
+    "code_or_threshold_changed": false,
+    "smoke_or_formal_training_run": false
+  },
+  "decision": "The saved canonical list supports a complete one-to-one metadata mapping for all 41 targets under the accepted hierarchical binding. This is a mapping-only result and does not promote provenance, authorize raw access, make v11 valid for training, or authorize training.",
+  "minimum_next_step_requiring_explicit_approval": "Any provenance change or access to detail, file, download, raw CSV, or Arbin endpoints requires a separate chief-engineer approval."
+}

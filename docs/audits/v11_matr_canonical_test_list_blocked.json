@@ -1,0 +1,85 @@
+{
+  "audit": "v11_matr_canonical_test_list_and_41_cell_mapping",
+  "status": "BLOCKED_ENTITY_MISSING_PROJECT_ID",
+  "request": {
+    "method": "GET",
+    "start_utc": "2026-08-04T09:57:24Z",
+    "end_utc": "2026-08-04T09:57:26Z",
+    "requested_url": "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests",
+    "final_url": "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests",
+    "same_origin": true,
+    "curl_exit_code": 0,
+    "http_status": 200,
+    "content_type": "application/json",
+    "content_length": 463120,
+    "body_sha256": "d5b26dfba5885d4ababc0f2de3330761bff6a72b24b9d3edff668895d5e02cc8",
+    "response_headers": {
+      "date": "Tue, 04 Aug 2026 09:57:27 GMT",
+      "last_modified": "Wed, 12 Feb 2020 14:54:53 GMT",
+      "etag": "d35bc98e6af5807aa10da836d5105d1a",
+      "x_amz_version_id": null,
+      "x_amz_storage_class": "INTELLIGENT_TIERING",
+      "server": "AmazonS3",
+      "x_cache": "Miss from cloudfront",
+      "via": "CloudFront"
+    },
+    "entity_fingerprint_present": true
+  },
+  "structural_gate": {
+    "top_level_type": "array",
+    "object_count": 46,
+    "parseable_json": true,
+    "expected_batch_id": "5c86c0b5fa2ede00015ddf67",
+    "objects_with_expected_batch_id": 46,
+    "distinct_batch_id_count": 1,
+    "expected_project_id": "5c48dd2bc625d700019f3204",
+    "objects_with_project_id_field": 0,
+    "objects_with_expected_project_id": 0,
+    "project_id_only_present_in_request_url": true,
+    "entity_level_project_and_batch_binding_pass": false,
+    "failure_reason": "All 46 test objects bind to the expected Batch1 ID, but none contains a projectId field. The current approval requires projectId and batchId to be verifiable in the entity, so URL-path projectId alone is insufficient."
+  },
+  "allowed_field_observation_before_stop": {
+    "schema_keys_observed": [
+      "_id",
+      "batchId",
+      "batteryType",
+      "cellId",
+      "channel",
+      "dataFileId",
+      "metaDataFileId",
+      "name",
+      "scheduleFileId",
+      "startDate",
+      "summary"
+    ],
+    "comments_present_on_objects": 5,
+    "mapping_started": false,
+    "mapping_rows_written": 0
+  },
+  "mapping_gate": {
+    "target_supplementary_table9_candidates": 36,
+    "target_known_early_terminated": 5,
+    "uniquely_mapped_candidates": 0,
+    "uniquely_mapped_early_terminated": 0,
+    "mapping_not_attempted_reason": "Entity-level projectId/batchId binding failed before mapping admission."
+  },
+  "prohibited_actions_confirmed": {
+    "detail_endpoint_called": false,
+    "file_metadata_endpoint_called": false,
+    "download_endpoint_called": false,
+    "raw_csv_or_arbin_accessed": false,
+    "alternate_list_endpoint_attempted": false,
+    "provenance_or_v11_changed": false,
+    "training_run": false
+  },
+  "state_after_stop": {
+    "official_continuation_cells": 5,
+    "official_cycle_life_eol_cells": 0,
+    "direct_crossing_cells": 0,
+    "candidate_cells_still_right_censored": 36,
+    "known_early_terminated_cells_still_right_censored": 5,
+    "v11_valid_for_training": false
+  },
+  "minimum_next_step_requiring_explicit_approval": "Decide whether the admitted composite source binding plus canonical URL projectId and entity-level batchId is an acceptable hierarchical binding. Without that explicit rule change, the list entity remains inadmissible and 41-cell mapping cannot proceed."
+}

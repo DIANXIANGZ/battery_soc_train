@@ -1,0 +1,7 @@
+{
+  "version": "research_v1",
+  "scope": "same_chemistry_cross_dataset",
+  "seeds": [11, 23, 42, 67, 101],
+  "external_test_locked": true,
+  "minimum_primary_datasets": 3
+}

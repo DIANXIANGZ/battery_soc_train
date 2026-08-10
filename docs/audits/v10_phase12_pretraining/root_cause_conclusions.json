@@ -1,0 +1,47 @@
+{
+  "audit_date": "2026-08-04",
+  "training_performed": false,
+  "phase_1_2_passed": true,
+  "soc_soe": {
+    "layered_groups": 626,
+    "soc_rows": 615765,
+    "soe_rows": 615765,
+    "soc_physical_candidate_max_absolute_error": 3.3306690738754696e-16,
+    "soe_physical_candidate_max_absolute_error": 4.3021142204224816e-16,
+    "within_0_01_coverage": 1.0,
+    "uses_future_information": false,
+    "single_root_cause_hypothesis": "The rejected learned regressors were approximating an exact causal ratio already defined by cumulative charge or energy and the fixed pre-cycle reference; approximation error, not label-feature misalignment, caused the remaining SOC/SOE coverage failure after v10 repair.",
+    "minimum_falsifiable_experiment": "On the unchanged strict held-out endpoints, score the transparent causal ratio as a named non-trained baseline beside the learned candidates. Reject the hypothesis if its held-out coverage is below 100% or any prefix changes after a future-tail perturbation."
+  },
+  "soh": {
+    "strict_fold_count": 3,
+    "first_complete_definition_max_absolute_condition_shift": 0.019368977525396125,
+    "train_cells_stat_definition_max_absolute_condition_shift": 0.01646382005154401,
+    "nominal_definition_warning": "CALCE files aggregate long drive traces and produce 6-7 Ah apparent capacity, so a 1.1 Ah nominal denominator is not comparable for lifecycle SOH.",
+    "single_root_cause_hypothesis": "The main SOH failure is unseen charging-policy trajectory shift rather than the choice between first-complete and train-cell statistical normalization; their largest mean shifts are only about 1.94% and 1.65%, while the rejected smoke SOH MAE was about 5.77%.",
+    "minimum_falsifiable_experiment": "Using the unchanged first-complete SOH definition and strict folds, stratify existing-model residuals by held-out policy and cycle range. Reject the hypothesis if residual magnitude is not concentrated in unseen-policy or out-of-range trajectory regions."
+  },
+  "rul": {
+    "same_numeric_unit": "physical cycles",
+    "same_supervised_task": false,
+    "matr": {
+      "cells": 46,
+      "label_rows": 38763,
+      "median_observation_step_cycles": 1.0,
+      "median_rul_cycles": 422.0,
+      "max_rul_cycles": 1225.0,
+      "eol": "official cycle_life at 0.88 Ah, 80% of nominal capacity"
+    },
+    "oxford": {
+      "cells": 8,
+      "label_rows": 519,
+      "median_observation_step_cycles": 100.0,
+      "median_rul_cycles": 2300.0,
+      "max_rul_cycles": 7900.0,
+      "eol": "first observed capacity at or below 80% of first complete cycle"
+    },
+    "single_root_cause_hypothesis": "Joint RUL regression conflates two different supervision protocols and lifetime domains despite both labels being expressed in physical cycles.",
+    "minimum_falsifiable_experiment": "Keep the same causal feature set and model family, but evaluate source-stratified strict held-out tasks with separately reported acceptance. Reject the hypothesis if both source-specific errors remain as large as the joint error."
+  },
+  "decision": "v10 data and Phase 1/2 diagnostics pass. A new strict smoke run may be considered only after chief-engineer approval; formal training remains prohibited."
+}

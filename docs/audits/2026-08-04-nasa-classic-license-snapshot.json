@@ -1,0 +1,62 @@
+{
+  "audit": "nasa_classic_official_license_admission",
+  "captured_at_utc": "2026-08-04T14:13:46Z/2026-08-04T14:13:55Z",
+  "status": "NOT_ADMITTED_STOPPED",
+  "official_dataset": {
+    "title": "Li-ion Battery Aging Datasets",
+    "catalog_url": "https://data.nasa.gov/dataset/li-ion-battery-aging-datasets",
+    "repository_url": "https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/",
+    "download_url_recorded_in_existing_manifest": "https://phm-datasets.s3.amazonaws.com/NASA/5.+Battery+Data+Set.zip",
+    "catalog_license_field_observed_before_controlled_snapshot": "License not specified",
+    "license_admitted": false
+  },
+  "controlled_request": {
+    "method": "GET",
+    "url": "https://data.nasa.gov/dataset/li-ion-battery-aging-datasets",
+    "client": "curl 8.7.1 x86_64-apple-darwin25.0; SecureTransport; LibreSSL/3.3.6",
+    "automatic_retry": false,
+    "follow_redirects": false,
+    "proxy_or_mirror": false,
+    "curl_exit_code": 35,
+    "http_status": 0,
+    "effective_url": "https://data.nasa.gov/dataset/li-ion-battery-aging-datasets",
+    "redirect_count": 0,
+    "observed_error": "LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to data.nasa.gov:443",
+    "response_entity_available": false,
+    "response_bytes": null,
+    "response_sha256": null
+  },
+  "existing_local_archive": {
+    "path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/03_NASA_PCoE_多状态原始数据/Battery_Data_Set.zip",
+    "bytes": 209708670,
+    "sha256": "82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e",
+    "license_snapshot_bundled": false
+  },
+  "policy_scope_review": {
+    "science_data_license_guidance_url": "https://science.data.nasa.gov/about/license",
+    "earthdata_data_use_url": "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy",
+    "finding": "General CC0 language is scoped to NASA-led missions or specific NASA data systems and cannot be inferred to override this PCoE dataset's explicit License not specified metadata.",
+    "applicable_explicit_open_license_found": false
+  },
+  "blockers": [
+    "dataset_license_not_specified",
+    "no_dataset_bound_government_open_data_statement",
+    "controlled_official_snapshot_tls_failure",
+    "no_reproducible_response_entity_fingerprint"
+  ],
+  "permanent_access_constraints": {
+    "no_retry": true,
+    "no_mirror": true,
+    "no_firewall_or_access_control_bypass": true,
+    "no_redirect_following_to_obtain_dataset": true,
+    "no_download": true
+  },
+  "decision": {
+    "nasa_classic_admitted": false,
+    "protocol_tdd_authorized": false,
+    "v12_authorized": false,
+    "training_authorized": false,
+    "next_action": "Exclude NASA classic aging from exact-RUL admission and audit only datasets with explicit open licenses and directly accessible official endpoints."
+  }
+}
+

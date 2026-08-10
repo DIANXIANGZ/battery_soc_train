@@ -1,0 +1,64 @@
+{
+  "audit": "v11_matr_b1c31_canonical_test_detail_schema",
+  "status": "BLOCKED_TLS_NO_HTTP_RESPONSE",
+  "scope": "One authorized read-only request to the already discovered canonical detail endpoint for b1c31; schema and termination-semantics metadata only",
+  "local_binding_before_request": {
+    "cell_id": "b1c31",
+    "test_id": "5c86c0bdfa2ede00015ddf71",
+    "channel": 36,
+    "barcode": "EL150800460481",
+    "batch_id": "5c86c0b5fa2ede00015ddf67",
+    "mapping_count": 1,
+    "mapping_result": "PASS",
+    "source": "docs/audits/v11_matr_41_cell_unique_mapping.csv"
+  },
+  "request": {
+    "attempt_count": 1,
+    "method": "GET",
+    "start_utc": "2026-08-04T12:36:49.334639Z",
+    "end_utc": "2026-08-04T12:36:50.395414Z",
+    "requested_url": "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests/5c86c0bdfa2ede00015ddf71",
+    "client": "Python urllib; no automatic application-level retry",
+    "result": "TLS_HANDSHAKE_FAILED",
+    "error_type": "URLError",
+    "error": "[SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:1129)",
+    "http_status": null,
+    "content_type": null,
+    "etag": null,
+    "last_modified": null,
+    "byte_count": null,
+    "sha256": null,
+    "response_entity_received": false
+  },
+  "gate_result": {
+    "http_2xx_verified": false,
+    "json_verified": false,
+    "response_fingerprint_complete": false,
+    "url_entity_project_batch_test_binding_verified": false,
+    "b1c31_entity_mapping_verified": false,
+    "schema_enumerated": false,
+    "termination_semantics_fields_observed": false,
+    "sufficient_to_distinguish_termination_reason": false,
+    "reason": "TLS negotiation failed before an HTTP response or entity was received. Absence of metadata cannot be interpreted as absence of EOL or termination fields."
+  },
+  "stop_boundary": {
+    "request_retried": false,
+    "alternate_client_used": false,
+    "second_test_accessed": false,
+    "file_endpoint_accessed": false,
+    "download_endpoint_accessed": false,
+    "raw_csv_or_arbin_accessed": false
+  },
+  "state_after_stop": {
+    "v11_valid_for_training": false,
+    "official_continuation_cells": 5,
+    "official_cycle_life_eol_cells": 0,
+    "observed_eol_crossing_cells": 0,
+    "candidate_cells_still_right_censored": 36,
+    "known_early_terminated_cells_still_right_censored": 5,
+    "provenance_changed": false,
+    "training_run": false
+  },
+  "decision": "The authorized detail-schema audit is inconclusive because no HTTP response entity was obtained. It is not sufficient to distinguish termination reason or EOL terminal workflow, and no inference is made from missing evidence.",
+  "minimum_next_step_requiring_explicit_approval": "Chief engineer must decide whether to authorize one controlled retry with a different official-endpoint-capable client. No retry or further endpoint access is authorized by this audit."
+}

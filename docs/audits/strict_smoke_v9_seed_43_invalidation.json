@@ -1,0 +1,10 @@
+{
+  "valid_for_evaluation": false,
+  "invalidated_at": "2026-08-04",
+  "reason": "Upstream public_battery_corpus_v9 has a first-cycle SOE label-feature reference mismatch.",
+  "affected_soe_test_predictions": 137,
+  "total_soe_test_predictions": 9000,
+  "metrics_must_not_be_used_for_model_acceptance": true,
+  "models_must_not_be_deployed": true,
+  "formal_training_must_not_start": true
+}

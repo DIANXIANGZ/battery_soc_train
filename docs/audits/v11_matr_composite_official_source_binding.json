@@ -1,0 +1,107 @@
+{
+  "audit": "v11_matr_composite_official_source_binding",
+  "audited_at_utc": "2026-08-04T09:19:41Z",
+  "status": "ADMITTED_COMPOSITE_OFFICIAL_SOURCE",
+  "scope": "Bind project-level official license evidence to batch-level official JSON without accessing raw CSV/Arbin or changing v11",
+  "input_evidence": {
+    "endpoint_resolution_audit": {
+      "path": "docs/audits/v11_matr_official_endpoint_resolution_blocked.json",
+      "sha256": "f8241cad593d497939b6c26c92aa9a2ea4696134e1cb1cb6cdd3f76846ef2a19"
+    },
+    "fresh_project_page_capture": {
+      "start_utc": "2026-08-04T09:18:54.737Z",
+      "end_utc": "2026-08-04T09:18:54.978Z",
+      "requested_url": "https://data.matr.io/1/projects/5c48dd2bc625d700019f3204",
+      "final_url": "https://data.matr.io/1/projects/5c48dd2bc625d700019f3204",
+      "method": "Codex in-app browser direct navigation plus read-only DOM snapshot",
+      "page_title": "Experimental Data Platform",
+      "project_identity_visible": "Data-driven prediction of battery cycle life before capacity degradation",
+      "project_id_visible_in_final_url": true,
+      "license_label_visible": "CC BY 4",
+      "license_url_visible": "https://creativecommons.org/licenses/by/4.0/",
+      "batch_or_file_clicked": false,
+      "api_raw_or_arbin_request_made": false
+    }
+  },
+  "binding_rule": {
+    "all_conditions_required": true,
+    "conditions": [
+      "a: official project page projectId equals the projectId encoded in the JSON URL",
+      "b: official project page explicitly displays CC BY 4",
+      "c: JSON under that projectId contains Batch1 ID and structFileId",
+      "d: JSON evidence records HTTP 200, ETag, Last-Modified, byte count, and SHA-256",
+      "e: page and JSON capture time, URL, and capture method are completely recorded"
+    ],
+    "counterexample_rule": "Reject the composite source if any item is missing, any ID differs, the page does not explicitly show CC BY 4, the JSON lacks the Batch1/file identifiers or reproducible response fingerprint, or either capture lacks time, URL, or method."
+  },
+  "condition_results": {
+    "a_project_id_exact_match": {
+      "pass": true,
+      "project_page_project_id": "5c48dd2bc625d700019f3204",
+      "json_url_project_id": "5c48dd2bc625d700019f3204"
+    },
+    "b_project_page_cc_by_4": {
+      "pass": true,
+      "label": "CC BY 4",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "c_json_contains_batch_and_struct_file": {
+      "pass": true,
+      "batch_id": "5c86c0b5fa2ede00015ddf67",
+      "struct_file_id": "5c86c0b5fa2ede00015ddf66"
+    },
+    "d_json_response_fingerprint_complete": {
+      "pass": true,
+      "http_status": 200,
+      "etag": "ba49817d57e15419e4e84532b56b61c8",
+      "last_modified": "Wed, 12 Feb 2020 14:52:39 GMT",
+      "byte_count": 5367,
+      "sha256": "2a11ac4d5afa15eeffa15791e0e1f76b700a9b792dd7a08bc9ea99679902773b"
+    },
+    "e_capture_record_complete": {
+      "pass": true,
+      "json_capture": {
+        "start_utc": "2026-08-04T09:06:21Z",
+        "end_utc": "2026-08-04T09:06:22Z",
+        "url": "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches",
+        "method": "curl GET with HTTP response headers and local entity hash",
+        "complete": true
+      },
+      "project_page_capture": {
+        "url": "https://data.matr.io/1/projects/5c48dd2bc625d700019f3204",
+        "method": "Codex in-app browser direct navigation plus read-only DOM snapshot",
+        "start_utc": "2026-08-04T09:18:54.737Z",
+        "end_utc": "2026-08-04T09:18:54.978Z",
+        "final_url_exact_match": true,
+        "project_id_visible_in_final_url": true,
+        "project_identity_visible": true,
+        "license_label_visible": "CC BY 4",
+        "license_url_visible": "https://creativecommons.org/licenses/by/4.0/",
+        "complete": true
+      },
+      "failure_reason": null
+    }
+  },
+  "independent_consistency_check": {
+    "passed_condition_count": 5,
+    "required_condition_count": 5,
+    "all_conditions_pass": true,
+    "project_id_equal": true,
+    "batch_and_file_ids_present": true,
+    "license_visible_on_official_page": true,
+    "json_fingerprint_reproducible": true,
+    "capture_records_complete": true
+  },
+  "decision": {
+    "composite_official_source_admitted": true,
+    "official_cycle_life_eol_promoted": 0,
+    "official_continuation_cells": 5,
+    "candidate_cells_still_right_censored": 36,
+    "known_early_terminated_cells_still_right_censored": 5,
+    "direct_crossing_cells": 0,
+    "v11_valid_for_training": false,
+    "raw_metadata_endpoint_plan_authorized": false,
+    "smoke_or_formal_training_authorized": false
+  },
+  "minimum_next_step_requiring_explicit_approval": "Approve a separate official-only raw metadata endpoint discovery and audit. The composite binding admits the source identity only; it does not authorize raw CSV/Arbin access, provenance changes, corpus rebuilds, or training."
+}

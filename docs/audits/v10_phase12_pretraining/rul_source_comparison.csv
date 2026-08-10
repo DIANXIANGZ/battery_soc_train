@@ -1,0 +1,3 @@
+source_id,cell_count,label_rows,cycle_id_min,cycle_id_max,median_observation_step_cycles,rul_min_cycles,rul_median_cycles,rul_p95_cycles,rul_max_cycles
+mit_stanford_fast_charge,46,38763,2.0,1226.0,1.0,1.0,422.0,929.0,1225.0
+oxford_battery_degradation_1,8,519,0.0,8200.0,100.0,0.0,2300.0,6200.0,7900.0

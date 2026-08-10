@@ -1,0 +1,83 @@
+{
+  "audit": "v11_matr_b1c31_canonical_detail_browser_retry",
+  "status": "CAPABILITY_LIMITED_NO_ENTITY_FINGERPRINT",
+  "scope": "One approved Codex in-app-browser retry against the same b1c31 official detail page and its already page-requested canonical detail JSON; no direct second fetch and no other test or file endpoint",
+  "browser_session": {
+    "navigation_start_utc": "2026-08-04T12:38:29.395Z",
+    "navigation_end_utc": "2026-08-04T12:38:29.592Z",
+    "audit_end_utc": "2026-08-04T12:39:26Z",
+    "requested_page_url": "https://data.matr.io/1/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests/5c86c0bdfa2ede00015ddf71",
+    "final_page_url": "https://data.matr.io/1/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests/5c86c0bdfa2ede00015ddf71",
+    "page_title": "Experimental Data Platform",
+    "browser": "Codex in-app browser"
+  },
+  "visible_page_binding": {
+    "test_name": "2017-05-12_6C-50per_3_6C_CH36",
+    "channel": 36,
+    "cell_id_barcode": "EL150800460481",
+    "expected_local_cell_id": "b1c31",
+    "expected_test_id": "5c86c0bdfa2ede00015ddf71",
+    "expected_batch_id": "5c86c0b5fa2ede00015ddf67",
+    "page_url_binding_consistent": true,
+    "visible_mapping_consistent": true
+  },
+  "observed_page_resource": {
+    "inventory_id": "e031676c-5a7a-488b-884e-2852626042d6",
+    "page_url": "https://data.matr.io/1/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests/5c86c0bdfa2ede00015ddf71",
+    "canonical_detail_url": "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests/5c86c0bdfa2ede00015ddf71",
+    "same_origin": true,
+    "exact_url_match_count": 1,
+    "resource_kind": "other",
+    "resource_source_kind": "resource",
+    "resource_source_property": "xmlhttprequest",
+    "canonical_url_project_batch_test_binding_consistent": true,
+    "matching_developer_log_count": 0
+  },
+  "response_metadata_available_from_browser": {
+    "http_status": null,
+    "content_type": null,
+    "etag": null,
+    "last_modified": null,
+    "byte_count": null,
+    "sha256": null,
+    "json_entity_body_available_for_audited_parse": false,
+    "complete_entity_fingerprint_available": false
+  },
+  "gate_result": {
+    "same_origin_resource_url_verified": true,
+    "project_batch_test_url_binding_verified": true,
+    "visible_b1c31_mapping_verified": true,
+    "http_2xx_verified": false,
+    "json_content_type_verified": false,
+    "entity_level_project_batch_test_binding_verified": false,
+    "entity_fingerprint_verified": false,
+    "metadata_schema_read": false,
+    "termination_semantics_values_read": false,
+    "sufficient_to_distinguish_termination_reason": false,
+    "reason": "The in-app browser exposed the exact same-origin XHR URL and visible page identity, but not its HTTP status, response headers, response entity, byte count, or SHA-256. The approved fingerprint gate therefore cannot be satisfied."
+  },
+  "interpretation_boundary": "No termination or EOL conclusion is drawn. The inability to inspect a fingerprinted JSON entity is a browser capability limitation, not evidence that termination-related fields are absent.",
+  "prohibited_actions_confirmed": {
+    "url_changed_or_variant_tried": false,
+    "manual_or_automatic_second_retry": false,
+    "mirror_or_proxy_used": false,
+    "second_test_accessed": false,
+    "file_link_clicked": false,
+    "file_endpoint_accessed": false,
+    "download_endpoint_accessed": false,
+    "raw_csv_or_arbin_accessed": false,
+    "schema_or_termination_values_read_without_fingerprint": false
+  },
+  "state_after_stop": {
+    "v11_valid_for_training": false,
+    "official_continuation_cells": 5,
+    "official_cycle_life_eol_cells": 0,
+    "observed_eol_crossing_cells": 0,
+    "candidate_cells_still_right_censored": 36,
+    "known_early_terminated_cells_still_right_censored": 5,
+    "provenance_changed": false,
+    "training_run": false
+  },
+  "decision": "The controlled browser retry confirms that the official b1c31 detail page requests the approved canonical detail URL and that the visible page matches b1c31. It does not provide the complete response fingerprint required to admit the JSON for termination-semantics adjudication, so the audit stops without reading the schema.",
+  "minimum_next_step_requiring_explicit_approval": "Chief engineer must decide whether any separately fingerprint-capable official-endpoint method may be attempted. No further navigation, retry, endpoint access, provenance change, or training is authorized."
+}

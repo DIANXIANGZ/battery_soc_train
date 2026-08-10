@@ -1,0 +1,195 @@
+{
+  "manifest_version": 1,
+  "sources": [
+    {
+      "source_id": "nasa_randomized_recommissioned",
+      "status": "approved",
+      "version": "NASA Open Data modified 2023-12-18",
+      "landing_page": "https://data.nasa.gov/dataset/randomized-and-recommissioned-battery-dataset",
+      "download_urls": [
+        "https://data.nasa.gov/docs/legacy/battery_alt_dataset.zip"
+      ],
+      "license": "United States government work; https://www.usa.gov/government-works",
+      "targets": ["soc", "soe", "soh", "rul", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "oxford_battery_degradation_1",
+      "status": "approved",
+      "version": "ORA uuid 03ba4b01-cfed-46d3-9b1a-7d4a7bdf6fac",
+      "landing_page": "https://ora.ox.ac.uk/objects/uuid%3A03ba4b01-cfed-46d3-9b1a-7d4a7bdf6fac",
+      "download_urls": [
+        "https://ora.ox.ac.uk/objects/uuid:03ba4b01-cfed-46d3-9b1a-7d4a7bdf6fac/files/m5ac36a1e2073852e4f1f7dee647909a7"
+      ],
+      "license": "Open Data Commons ODbL 1.0",
+      "targets": ["soc", "soe", "soh", "rul", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "calce_a123_dynamic_temperature",
+      "status": "approved",
+      "version": "CALCE A123 archive, accessed 2026-08-03",
+      "landing_page": "https://calce.umd.edu/battery-data",
+      "download_urls": [
+        "https://web.calce.umd.edu/batteries/data/A123_DST-US06-FUDS-N10.zip"
+      ],
+      "license": "Research/publication use with CALCE database and article attribution",
+      "targets": ["soc", "soe", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "calce_a123_dynamic_0c",
+      "status": "approved",
+      "version": "CALCE A123 archive, accessed 2026-08-03",
+      "landing_page": "https://calce.umd.edu/battery-data",
+      "download_urls": [
+        "https://web.calce.umd.edu/batteries/data/A123_DST-US06-FUDS-0.zip"
+      ],
+      "license": "Research/publication use with CALCE database and article attribution",
+      "targets": ["soc", "soe", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "calce_a123_dynamic_25c",
+      "status": "approved",
+      "version": "CALCE A123 archive, accessed 2026-08-03",
+      "landing_page": "https://calce.umd.edu/battery-data",
+      "download_urls": [
+        "https://web.calce.umd.edu/batteries/data/A123_DST-US06-FUDS-25.zip"
+      ],
+      "license": "Research/publication use with CALCE database and article attribution",
+      "targets": ["soc", "soe", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "calce_a123_dynamic_50c",
+      "status": "approved",
+      "version": "CALCE A123 archive, accessed 2026-08-03",
+      "landing_page": "https://calce.umd.edu/battery-data",
+      "download_urls": [
+        "https://web.calce.umd.edu/batteries/data/A123_DST-US06-FUDS-50.zip"
+      ],
+      "license": "Research/publication use with CALCE database and article attribution",
+      "targets": ["soc", "soe", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "sandia_cell_cycle_testing",
+      "status": "approved",
+      "version": "Sandia Battery Cell Testing Data Archive, accessed 2026-08-03",
+      "landing_page": "https://www.sandia.gov/energystoragesafety/rd-data-repository/",
+      "download_urls": [
+        "https://www.sandia.gov/app/uploads/sites/163/Sandia_Cell_Cycle_Testing_Data.zip"
+      ],
+      "license": "Public research repository; retain Sandia dataset citation and source terms",
+      "targets": ["soc", "soe", "soh", "rul", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "batterylife_v12_life_labels",
+      "status": "approved",
+      "version": "BatteryLife Processed v12, Zenodo 21149533",
+      "landing_page": "https://zenodo.org/records/21149533",
+      "download_urls": [
+        "https://zenodo.org/records/21149533/files/Life%20labels.zip?download=1"
+      ],
+      "license": "Open Zenodo dataset; cite BatteryLife (KDD 2025) and each original experimental source",
+      "targets": ["rul"],
+      "checksum": null
+    },
+    {
+      "source_id": "batterylife_v12_hnei",
+      "status": "approved",
+      "version": "BatteryLife Processed v12, Zenodo 21149533",
+      "landing_page": "https://zenodo.org/records/21149533",
+      "download_urls": [
+        "https://zenodo.org/records/21149533/files/HNEI.zip?download=1"
+      ],
+      "license": "Open Zenodo dataset; cite BatteryLife, BatteryML, BatteryArchive, and the original HNEI source",
+      "targets": ["soc", "soe", "soh", "rul", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "batterylife_v12_mich",
+      "status": "approved",
+      "version": "BatteryLife Processed v12, Zenodo 21149533",
+      "landing_page": "https://zenodo.org/records/21149533",
+      "download_urls": [
+        "https://zenodo.org/records/21149533/files/MICH.zip?download=1"
+      ],
+      "license": "Open Zenodo dataset; cite BatteryLife, BatteryArchive, and the original MICH source",
+      "targets": ["soc", "soe", "soh", "rul", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "batterylife_v12_mich_exp",
+      "status": "approved",
+      "version": "BatteryLife Processed v12, Zenodo 21149533",
+      "landing_page": "https://zenodo.org/records/21149533",
+      "download_urls": [
+        "https://zenodo.org/records/21149533/files/MICH_EXP.zip?download=1"
+      ],
+      "license": "Open Zenodo dataset; cite BatteryLife, BatteryArchive, and the original MICH_EXP source",
+      "targets": ["soc", "soe", "soh", "rul", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "batterylife_v12_snl",
+      "status": "approved",
+      "version": "BatteryLife Processed v12, Zenodo 21149533",
+      "landing_page": "https://zenodo.org/records/21149533",
+      "download_urls": [
+        "https://zenodo.org/records/21149533/files/SNL.zip?download=1"
+      ],
+      "license": "Open Zenodo dataset; cite BatteryLife, BatteryML, BatteryArchive, and the original SNL source",
+      "targets": ["soc", "soe", "soh", "rul", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "batterylife_v12_ul_pur",
+      "status": "approved",
+      "version": "BatteryLife Processed v12, Zenodo 21149533",
+      "landing_page": "https://zenodo.org/records/21149533",
+      "download_urls": [
+        "https://zenodo.org/records/21149533/files/UL_PUR.zip?download=1"
+      ],
+      "license": "Open Zenodo dataset; cite BatteryLife, BatteryML, BatteryArchive, and the original UL-PUR source",
+      "targets": ["soc", "soe", "soh", "rul", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "batterylife_v12_calb",
+      "status": "approved",
+      "version": "BatteryLife Processed v12, Zenodo 21149533",
+      "landing_page": "https://zenodo.org/records/21149533",
+      "download_urls": [
+        "https://zenodo.org/records/21149533/files/CALB.zip?download=1"
+      ],
+      "license": "Open Zenodo dataset; cite BatteryLife and the original CALB source",
+      "targets": ["soc", "soe", "soh", "rul", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "mit_stanford_fast_charge",
+      "status": "approved",
+      "version": "MATR official 2017-05-12 batch, file 5c86c0b5fa2ede00015ddf66",
+      "landing_page": "https://data.matr.io/1/",
+      "download_urls": [
+        "https://data.matr.io/1/api/v1/file/5c86c0b5fa2ede00015ddf66/download"
+      ],
+      "license": "Public research dataset; cite Severson et al., Nature Energy 2019, and the MATR repository",
+      "targets": ["soc", "soe", "soh", "rul", "sot"],
+      "checksum": null
+    },
+    {
+      "source_id": "nasa_aging",
+      "status": "candidate",
+      "version": null,
+      "landing_page": "https://data.nasa.gov/dataset/li-ion-battery-aging-datasets",
+      "download_urls": [],
+      "license": "NASA public dataset; official portal currently exposes no data resource",
+      "targets": ["soc", "soe", "soh", "rul", "sot"],
+      "checksum": null
+    }
+  ]
+}

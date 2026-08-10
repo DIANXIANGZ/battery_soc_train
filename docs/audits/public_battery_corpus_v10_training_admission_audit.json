@@ -1,0 +1,44 @@
+{
+  "audit_date": "2026-08-04",
+  "corpus_directory": "public_battery_corpus_v10",
+  "manifest_version": "public_battery_corpus_v5",
+  "passed": true,
+  "training_admitted_for_strict_smoke_only": true,
+  "formal_training_allowed": false,
+  "sample_rows": 615765,
+  "cycle_rows": 39290,
+  "protocols": {
+    "state_labels": "causal_precycle_reference_v2",
+    "state_integration": "native_cumulative_qd_and_dq_times_voltage_when_available_v1",
+    "feature_references": "first_cycle_reuses_sample_causal_reference_then_previous_completed_cycle_v1",
+    "matr_time_units": "raw_minutes_converted_to_seconds_v1"
+  },
+  "reference_consistency": {
+    "all_cycles_checked": 39290,
+    "nonfirst_cycles_checked": 39228,
+    "all_cycle_capacity_label_feature_max_error_ah": 0.0,
+    "all_cycle_energy_label_feature_max_error_wh": 0.0,
+    "nonfirst_capacity_reference_max_error_ah": 0.0,
+    "nonfirst_energy_reference_max_error_wh": 0.0,
+    "reference_values_per_cycle_max": 1,
+    "passed": true
+  },
+  "matr_consistency": {
+    "end_charge_vs_capacity_max_error_ah": 0.0,
+    "end_energy_vs_cycle_energy_max_error_wh": 0.0,
+    "official_rul_formula_max_error_cycles": 0.0,
+    "passed": true
+  },
+  "quality_reports": {
+    "source_count": 6,
+    "critical_count_total": 0,
+    "passed": true
+  },
+  "regression": {
+    "initial_expected_failure": "CALCE and Oxford failed; MATR passed",
+    "post_fix_result": "65 passed, 11 subtests passed",
+    "future_tail_causality_still_passed": true,
+    "legacy_v9_remains_invalidated": true,
+    "passed": true
+  }
+}

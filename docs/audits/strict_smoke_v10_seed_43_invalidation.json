@@ -1,0 +1,14 @@
+{
+  "valid_for_evaluation": false,
+  "invalidated_at": "2026-08-04",
+  "reason": "Upstream public_battery_corpus_v10 contains 10 MATR cells incorrectly labeled as observed RUL EOL at Batch 1 truncation.",
+  "affected_target": "rul_cycles",
+  "metrics_must_not_be_used_for_acceptance": true,
+  "models_must_not_be_deployed": true,
+  "formal_training_must_not_start": true,
+  "diagnostic_only_files": [
+    "physics_baseline_metrics_by_source_fold.csv",
+    "soh_unseen_strategy_cycle_range_audit.csv",
+    "rul_by_source/*/metrics_by_source_fold.csv"
+  ]
+}

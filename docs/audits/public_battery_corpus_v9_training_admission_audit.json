@@ -1,0 +1,78 @@
+{
+  "audit_date": "2026-08-04",
+  "corpus_directory": "public_battery_corpus_v9",
+  "manifest_version": "public_battery_corpus_v4",
+  "passed": true,
+  "training_admitted": true,
+  "sample_rows": 615765,
+  "cycle_rows": 39290,
+  "protocols": {
+    "state_labels": "causal_precycle_reference_v2",
+    "state_integration": "native_cumulative_qd_and_dq_times_voltage_when_available_v1",
+    "matr_time_units": "raw_minutes_converted_to_seconds_v1",
+    "rul_labels": "official_observed_eol_cycle_when_available_else_first_observed_80pct_soh_crossing"
+  },
+  "source_hashes": {
+    "oxford_battery_degradation_1": "a8f0b928f4ea77d7ba98b97194b78cc77336f2338fee8b57573d043f0cf26781",
+    "mit_stanford_fast_charge": "9d928ab978f0e3c70b31cb833a749fedd35094d01af76475d69b40aa3497f5ba",
+    "calce_a123_dynamic_0c": "c18df3909de27c4409d5e9730c5078284f3883ee52193b559ca8e0ee17732505",
+    "calce_a123_dynamic_25c": "b7e5402815b491f4052e1fc02ac12723a28a6893e3f695f10a39b773043145f2",
+    "calce_a123_dynamic_50c": "7fae05b50c7f4edcc799a7d817d56fb701e1e8894b538e043d05d08ab60f91bc",
+    "calce_a123_dynamic_temperature": "1753bbf603baf54388ea2fee28f3be00c082e525515efb2074f362f335988604"
+  },
+  "reference_consistency": {
+    "nonfirst_cycles_checked": 39228,
+    "capacity_reference_max_absolute_error_ah": 0.0,
+    "energy_reference_max_absolute_error_wh": 0.0,
+    "reference_values_per_cycle_max": 1,
+    "passed": true
+  },
+  "matr_native_state_consistency": {
+    "cycles": 38763,
+    "end_charge_vs_capacity_max_absolute_error_ah": 0.0,
+    "end_energy_vs_cycle_energy_max_absolute_error_wh": 0.0,
+    "soc_formula_max_absolute_error": 1.1102230246251565e-16,
+    "soe_formula_max_absolute_error": 4.3021142204224816e-16,
+    "capacity_range_ah": [0.8800565, 1.0983334],
+    "passed": true
+  },
+  "matr_rul_consistency": {
+    "observed_rows": 38763,
+    "official_eol_formula_max_absolute_error_cycles": 0.0,
+    "official_cycle_life_used_only_as_target": true,
+    "passed": true
+  },
+  "excluded_cycles": [
+    {
+      "cell_id": "b1c0",
+      "cycle_id": 12,
+      "capacity_ah": 1.5390544,
+      "reason": "gross_capacity_outlier"
+    },
+    {
+      "cell_id": "b1c18",
+      "cycle_id": 40,
+      "capacity_ah": 2.884083,
+      "reason": "gross_capacity_outlier"
+    }
+  ],
+  "quality_reports": {
+    "source_count": 6,
+    "critical_count_total": 0,
+    "passed": true
+  },
+  "causal_and_split_regression": {
+    "future_tail_does_not_change_prefix_state_labels": true,
+    "future_derived_features_rejected": true,
+    "cell_and_condition_overlap_rejected": true,
+    "legacy_v5_through_v8_rejected": true,
+    "xgboost_isolated_from_torch": true,
+    "test_result": "61 passed, 11 subtests passed",
+    "passed": true
+  },
+  "notes": [
+    "v7 and v8 remain invalidated and are not overwritten.",
+    "The experiment loader now rejects corpora without the admitted native state-integration protocol.",
+    "Strict smoke training may start; formal training remains prohibited until smoke acceptance is evaluated honestly."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "valid_for_training": false,
+  "invalidated_at": "2026-08-04",
+  "reason": "MATR Batch 1 cycle_life was treated as observed EOL for 10 continued or early-terminated cells even though none reached the official 0.88 Ah threshold; their cycle_life equals the file end plus one and must be continued with Batch 2 or marked censored.",
+  "affected_target": "rul_cycles",
+  "affected_cells": 10,
+  "affected_cycle_rows": 10453,
+  "cell_ids": ["b1c0", "b1c1", "b1c2", "b1c3", "b1c4", "b1c8", "b1c10", "b1c12", "b1c13", "b1c22"],
+  "evidence": {
+    "all_capacity_min_above_0_88_ah": true,
+    "all_cycle_life_equal_cycle_max_plus_one": true,
+    "all_incorrectly_marked_rul_observed": true
+  },
+  "supersedes": "training_admission_audit.json",
+  "downstream_results_must_not_be_used": true,
+  "minimum_fix": "Acquire and traceably append the official Batch 2 continuations for b1c0-b1c4; mark the five early-terminated Batch 1 cells as rul_observed=0; add a regression that observed MATR EOL requires an actual 0.88 Ah crossing or an authoritative continued trajectory."
+}

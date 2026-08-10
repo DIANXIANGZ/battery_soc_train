@@ -1,0 +1,62 @@
+{
+  "audit": "v11_matr_test_metadata_endpoint_and_41_cell_mapping",
+  "status": "BLOCKED_NON_2XX_METADATA_ENDPOINT",
+  "composite_official_source_admitted": true,
+  "request": {
+    "method": "GET",
+    "start_utc": "2026-08-04T09:21:36Z",
+    "end_utc": "2026-08-04T09:21:37Z",
+    "url": "https://data.matr.io/1/api/v1/edp/batches/5c86c0b5fa2ede00015ddf67/tests",
+    "same_origin": true,
+    "curl_exit_code": 0,
+    "tls": "TLSv1.3 / AEAD-AES128-GCM-SHA256; certificate CN=*.matr.io; issuer Amazon RSA 2048 M01",
+    "http_status": 301,
+    "content_length": 0,
+    "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "response_headers": {
+      "date": "Tue, 04 Aug 2026 09:21:38 GMT",
+      "location": "https://data.matr.io/1/#api/v1/edp/batches/5c86c0b5fa2ede00015ddf67/tests",
+      "server": "AmazonS3",
+      "x_cache": "Miss from cloudfront",
+      "via": "CloudFront"
+    },
+    "etag": null,
+    "last_modified": null,
+    "is_json": false,
+    "entity_fingerprint_present": false
+  },
+  "gate_evaluation": {
+    "http_2xx": false,
+    "parseable_json": false,
+    "project_id_bound": false,
+    "batch_id_bound": false,
+    "allowed_metadata_fields_read": false,
+    "stop_required": true,
+    "failure_reason": "The sole candidate tests metadata endpoint returned HTTP 301 with an empty body and a frontend hash-route Location. It is not a 2xx JSON metadata entity and has no ETag or Last-Modified fingerprint."
+  },
+  "mapping_audit": {
+    "mapping_started": false,
+    "target_candidate_cells": 36,
+    "target_known_early_terminated_cells": 5,
+    "uniquely_mapped_cells": 0,
+    "reason_not_started": "Endpoint admission failed before any metadata field could be read."
+  },
+  "prohibited_actions_confirmed": {
+    "alternate_url_variant_attempted": false,
+    "redirect_followed": false,
+    "download_endpoint_called": false,
+    "raw_csv_or_arbin_accessed": false,
+    "mirror_or_nonofficial_source_used": false,
+    "label_code_data_threshold_model_changed": false,
+    "smoke_or_formal_training_run": false
+  },
+  "state_after_stop": {
+    "official_continuation_cells": 5,
+    "official_cycle_life_eol_cells": 0,
+    "direct_crossing_cells": 0,
+    "candidate_cells_still_right_censored": 36,
+    "known_early_terminated_cells_still_right_censored": 5,
+    "v11_valid_for_training": false
+  },
+  "minimum_next_step_requiring_explicit_approval": "No further endpoint variant may be tried under the current approval. A new instruction must name or authorize discovery of the actual canonical tests metadata request without accessing raw/download resources."
+}

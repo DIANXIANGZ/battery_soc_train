@@ -1,0 +1,25 @@
+{
+  "datasets": [
+    {
+      "dataset_id": "A123#3",
+      "chemistry": "LFP",
+      "role": "development",
+      "source_root": "E:\\SOC电池数据中心\\01_原始数据\\01_CALCE_A123#3_原始压缩包",
+      "label_method": "offline_cycle_range"
+    },
+    {
+      "dataset_id": "A123#5",
+      "chemistry": "LFP",
+      "role": "frozen_external_test",
+      "source_root": "E:\\SOC电池数据中心\\05_外部评估数据\\04_历史外部数据归档\\extracted\\A123_5_part1\\A123_5_part1\\A123#5_part1",
+      "label_method": "offline_cycle_range"
+    },
+    {
+      "dataset_id": "CX2_4",
+      "chemistry": "LCO",
+      "role": "compatibility_audit",
+      "source_root": "E:\\SOC电池数据中心\\05_外部评估数据\\04_历史外部数据归档\\extracted\\CX2_4\\CX2_4",
+      "label_method": "source_defined"
+    }
+  ]
+}

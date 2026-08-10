@@ -1,0 +1,47 @@
+{
+  "targets": {
+    "soc": {
+      "model_absolute_error": {
+        "count": 0
+      },
+      "physical_absolute_error": {
+        "count": 615765,
+        "mean": 3.793191919414746e-17,
+        "std": 4.545937484921765e-17,
+        "p05": 0.0,
+        "median": 8.131516293641283e-18,
+        "p95": 1.1102230246251565e-16,
+        "min": 0.0,
+        "max": 3.3306690738754696e-16
+      },
+      "physical_within_0_01_coverage": 1.0,
+      "causal_inputs": [
+        "current-or-past cumulative counter",
+        "fixed nominal or previous completed cycle reference"
+      ],
+      "uses_future_information": false
+    },
+    "soe": {
+      "model_absolute_error": {
+        "count": 0
+      },
+      "physical_absolute_error": {
+        "count": 615765,
+        "mean": 4.238563343517225e-17,
+        "std": 5.020023424046248e-17,
+        "p05": 0.0,
+        "median": 1.734723475976807e-17,
+        "p95": 1.1102230246251565e-16,
+        "min": 0.0,
+        "max": 4.3021142204224816e-16
+      },
+      "physical_within_0_01_coverage": 1.0,
+      "causal_inputs": [
+        "current-or-past cumulative counter",
+        "fixed nominal or previous completed cycle reference"
+      ],
+      "uses_future_information": false
+    }
+  },
+  "group_count": 626
+}

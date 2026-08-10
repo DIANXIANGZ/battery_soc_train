@@ -1,0 +1,66 @@
+{
+  "run": "strict_smoke_v10_seed_43",
+  "date": "2026-08-04",
+  "stage": "strict_smoke",
+  "valid_as_diagnostic_evidence": true,
+  "accepted_for_deployment": false,
+  "formal_training_allowed": false,
+  "next_stage_conditions_met": false,
+  "leakage_audits": {
+    "learned_state_soh_sot": {"passed": true, "folds": 12},
+    "rul_matr": {"passed": true, "folds": 3},
+    "rul_oxford": {"passed": true, "folds": 3},
+    "test_used_for_selection": false,
+    "preprocessing_fit": "train_only"
+  },
+  "non_trained_physics_baseline": {
+    "must_not_be_reported_as_learned_model": true,
+    "soc": {"sample_count": 9000, "mae_machine_precision": true, "coverage_within_0_01": 1.0, "passed": true},
+    "soe": {"sample_count": 9000, "mae_machine_precision": true, "coverage_within_0_01": 1.0, "passed": true}
+  },
+  "learned_models": {
+    "soc": {"sample_count": 9000, "mae": 0.0036242358029026493, "coverage": 0.8976666666666666, "passed": false},
+    "soe": {"sample_count": 9000, "mae": 0.003841422836298204, "coverage": 0.8936666666666667, "passed": false},
+    "soh": {"sample_count": 8209, "mae": 0.0576540522604467, "coverage": 0.2809111950298453, "passed": false},
+    "sot_c": {"sample_count": 9000, "mae_c": 0.4484996894178859, "coverage": 0.9994444444444445, "passed": true}
+  },
+  "rul_source_tasks": {
+    "combined_metric_created": false,
+    "mit_stanford_fast_charge": {
+      "sample_count": 7850,
+      "mae_cycles": 72.61440583209433,
+      "coverage_within_1_cycle": 0.011464968152866241,
+      "eol": "official cycle_life at 0.88 Ah",
+      "median_sampling_step_cycles": 1,
+      "passed": false
+    },
+    "oxford_battery_degradation_1": {
+      "sample_count": 198,
+      "mae_cycles": 636.1682370185979,
+      "coverage_within_1_cycle": 0.12121212121212122,
+      "eol": "first observed capacity at or below 80% of first complete cycle",
+      "median_sampling_step_cycles": 100,
+      "passed": false
+    }
+  },
+  "soh_domain_hypothesis": {
+    "unseen_strategy_sample_count": 6445,
+    "unseen_strategy_weighted_mae": 0.06317307321138098,
+    "unseen_strategy_weighted_coverage": 0.2060512024825446,
+    "seen_strategy_sample_count": 1764,
+    "seen_strategy_weighted_mae": 0.037489602130757325,
+    "seen_strategy_weighted_coverage": 0.5544217687074829,
+    "out_of_train_cycle_range_sample_count": 0,
+    "falsified": false,
+    "assessment": "Aggregate residuals support an unseen-policy effect, but folds are inconsistent and the cycle-range component was not testable because no held-out sample lay outside the train cycle range."
+  },
+  "evidence_paths": {
+    "learned_per_source_fold": "learned_metrics_by_source_fold.csv",
+    "physics_per_source_fold": "physics_baseline_metrics_by_source_fold.csv",
+    "physics_predictions": "physics_baseline_predictions.csv",
+    "soh_domain_layers": "soh_unseen_strategy_cycle_range_audit.csv",
+    "rul_matr_per_fold": "rul_by_source/mit_stanford_fast_charge/metrics_by_source_fold.csv",
+    "rul_oxford_per_fold": "rul_by_source/oxford_battery_degradation_1/metrics_by_source_fold.csv"
+  },
+  "decision": "NOT_ACCEPTED: do not deploy and do not start formal training."
+}

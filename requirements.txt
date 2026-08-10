@@ -1,0 +1,9 @@
+torch==2.13.0
+numpy==2.5.1
+openpyxl==3.1.5
+pillow==12.3.0
+scipy==1.18.0
+scikit-learn==1.9.0
+pandas==3.0.5
+xlrd==2.0.2
+xgboost==3.3.0

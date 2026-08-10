@@ -1,0 +1,18 @@
+{
+  "valid_for_training": false,
+  "invalidated_at": "2026-08-04",
+  "reason": "First-cycle SOE label reference and experiment feature reference are inconsistent: CALCE uses 3.63 Wh in energy_reference_wh but 3.30 Wh in previous_energy_wh; Oxford uses 2.738 Wh versus 2.70 Wh.",
+  "affected_sample_rows": 4159,
+  "affected_cells": 16,
+  "affected_cycles": 16,
+  "source_evidence": {
+    "calce_a123_dynamic_0c": {"rows": 927, "max_error_wh": 0.33},
+    "calce_a123_dynamic_25c": {"rows": 993, "max_error_wh": 0.33},
+    "calce_a123_dynamic_50c": {"rows": 1003, "max_error_wh": 0.33},
+    "calce_a123_dynamic_temperature": {"rows": 661, "max_error_wh": 0.33},
+    "oxford_battery_degradation_1": {"rows": 575, "max_error_wh": 0.038}
+  },
+  "supersedes": "training_admission_audit.json",
+  "downstream_results_must_not_be_used": true,
+  "minimum_fix": "Derive first-cycle previous_energy_wh from the same source-specific nominal capacity times nominal voltage used by the causal label adapter, then add an all-cycle label-reference versus feature-reference regression gate and rebuild without overwriting v9."
+}

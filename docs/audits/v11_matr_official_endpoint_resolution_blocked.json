@@ -1,0 +1,84 @@
+{
+  "audit": "v11_matr_official_endpoint_resolution",
+  "status": "BLOCKED_METADATA_MISSING_LICENSE_AND_VERSION",
+  "scope": "official pages and metadata endpoint only; no raw CSV or Arbin access",
+  "prior_checkpoint": {
+    "noncanonical_request": "https://data.matr.io/1/api/v1/edp/batches/5c86c0b5fa2ede00015ddf67",
+    "http_status": 301,
+    "result": "empty body redirected to frontend hash route; not metadata"
+  },
+  "official_project_page": {
+    "url": "https://data.matr.io/1/projects/5c48dd2bc625d700019f3204",
+    "observed_in_existing_browser_state": true,
+    "parsed_content": {
+      "project_id": "5c48dd2bc625d700019f3204",
+      "title": "Data-driven prediction of battery cycle life before capacity degradation",
+      "license_label": "CC BY 4",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "fresh_http_request_made_in_this_resolution_step": false
+  },
+  "official_batch_page": {
+    "observed_at_utc": "2026-08-04T09:05:46.340Z",
+    "url": "https://data.matr.io/1/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67",
+    "parsed_content": {
+      "batch_id": "5c86c0b5fa2ede00015ddf67",
+      "title": "2017-05-12",
+      "struct_file_id": "5c86c0b5fa2ede00015ddf66",
+      "struct_display_size": "2.82 GB",
+      "test_entries_visible": 46,
+      "license_label": "CC BY 4",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "early_terminated_channels": [13, 19, 21, 22, 31],
+      "official_continuation_channels": [1, 2, 3, 5, 6]
+    },
+    "response_headers_available_from_browser_surface": false
+  },
+  "canonical_metadata_endpoint": {
+    "method": "GET",
+    "start_utc": "2026-08-04T09:06:21Z",
+    "end_utc": "2026-08-04T09:06:22Z",
+    "url": "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches",
+    "curl_exit_code": 0,
+    "http_status": 200,
+    "content_type": "application/json",
+    "content_length": 5367,
+    "body_sha256": "2a11ac4d5afa15eeffa15791e0e1f76b700a9b792dd7a08bc9ea99679902773b",
+    "response_headers": {
+      "date": "Tue, 04 Aug 2026 09:06:23 GMT",
+      "last_modified": "Wed, 12 Feb 2020 14:52:39 GMT",
+      "etag": "ba49817d57e15419e4e84532b56b61c8",
+      "x_amz_version_id": null,
+      "server": "AmazonS3",
+      "x_cache": "Miss from cloudfront",
+      "via": "CloudFront"
+    },
+    "parsed_json": {
+      "type": "array",
+      "batch_count": 3,
+      "batch1_id": "5c86c0b5fa2ede00015ddf67",
+      "batch1_struct_file_id": "5c86c0b5fa2ede00015ddf66",
+      "license_fields_present": false,
+      "version_fields_present": false
+    },
+    "is_parseable_metadata": true,
+    "passes_resolution_gate": false,
+    "failure_reason": "The canonical JSON is parseable and identifies the batch/file, but contains no license or data version field; the S3 version header is null. The webpage license cannot be cryptographically/versionably bound to this JSON object under the approved gate."
+  },
+  "prohibited_actions_confirmed": {
+    "raw_csv_or_arbin_accessed": false,
+    "download_redirect_followed": false,
+    "mirror_or_nonofficial_source_used": false,
+    "adapter_schema_data_or_threshold_changed": false,
+    "smoke_or_formal_training_run": false
+  },
+  "gate_decision": {
+    "stop_now": true,
+    "official_cycle_life_eol_promoted": 0,
+    "official_continuation_cells": 5,
+    "candidate_cells_still_right_censored": 36,
+    "known_early_terminated_cells_still_right_censored": 5,
+    "direct_crossing_cells": 0,
+    "v11_valid_for_training": false
+  }
+}

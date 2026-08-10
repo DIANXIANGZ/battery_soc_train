@@ -1,0 +1,89 @@
+{
+  "audit": "v11_matr_canonical_test_metadata_discovery",
+  "status": "CANONICAL_ENDPOINT_DISCOVERED_NOT_EXECUTED",
+  "scope": "One official Batch1 test-detail navigation in the in-app browser; resource inventory only; no raw/download access",
+  "source_binding": {
+    "composite_official_source_admitted": true,
+    "project_id": "5c48dd2bc625d700019f3204",
+    "batch_id": "5c86c0b5fa2ede00015ddf67"
+  },
+  "batch_page": {
+    "start_utc": "2026-08-04T09:23:19.566Z",
+    "end_utc": "2026-08-04T09:23:19.761Z",
+    "final_url": "https://data.matr.io/1/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67",
+    "selected_visible_test": "2017-05-12_6C-50per_3_6C_CH36 Channel 36",
+    "selected_test_locator_count": 1
+  },
+  "single_detail_navigation": {
+    "start_utc": "2026-08-04T09:23:40.500Z",
+    "end_utc": "2026-08-04T09:23:43.531Z",
+    "final_url": "https://data.matr.io/1/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests/5c86c0bdfa2ede00015ddf71",
+    "page_title": "Experimental Data Platform",
+    "page_render_succeeded": true,
+    "browser_http_status_exported": false,
+    "test_id_from_final_url": "5c86c0bdfa2ede00015ddf71",
+    "visible_dom_metadata": {
+      "test_name": "2017-05-12_6C-50per_3_6C_CH36",
+      "channel": 36,
+      "barcode_cell_id": "EL150800460481",
+      "start_date": "2017-05-13",
+      "schedule_file": {
+        "file_id": "5c86c0b5fa2ede00015ddf6a",
+        "filename": "20170512-6C-50per_3_6C.sdu",
+        "display_size": "19.02 KB"
+      },
+      "metadata_file": {
+        "file_id": "5c86c0b5fa2ede00015ddf6d",
+        "filename": "2017-05-12_6C-50per_3_6C_CH36_Metadata.csv",
+        "display_size": "553 B"
+      },
+      "data_file": {
+        "file_id": "5c86c0bafa2ede00015ddf70",
+        "filename": "2017-05-12_6C-50per_3_6C_CH36.csv",
+        "display_size": "135.51 MB"
+      },
+      "license_label": "CC BY 4",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  },
+  "observed_resource_inventory": {
+    "method": "in-app browser pageAssets resource inventory before and after the single detail navigation",
+    "canonical_test_list_json_endpoint": "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests",
+    "canonical_test_detail_json_endpoint": "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests/5c86c0bdfa2ede00015ddf71",
+    "new_non_download_file_metadata_urls": [
+      "https://data.matr.io/1/api/v1/file/5c86c0b5fa2ede00015ddf6a",
+      "https://data.matr.io/1/api/v1/file/5c86c0bafa2ede00015ddf70",
+      "https://data.matr.io/1/api/v1/file/5c86c0b5fa2ede00015ddf6d"
+    ],
+    "same_origin": true,
+    "project_and_batch_bound_in_test_endpoints": true,
+    "test_id_matches_final_url": true,
+    "test_id_matches_detail_resource": true,
+    "api_development_logs": [],
+    "evidence_type": "resource URLs already emitted by the official rendered page; endpoint bodies were not manually requested in this step"
+  },
+  "canonical_endpoint_plan_for_separate_approval": {
+    "step_1": "GET the canonical test-list JSON endpoint once and record UTC, HTTP headers/status, ETag, Last-Modified, byte count, SHA-256, and content type before parsing.",
+    "step_2": "Require HTTP 2xx JSON and exact projectId/batchId binding; read only testId, channel, barcode/cell identifier, and non-download file metadata identifiers.",
+    "step_3": "Map the 36 Supplementary Table 9 candidates and 5 known early terminations by barcode/channel/testId, requiring one-to-one uniqueness and no missing targets.",
+    "step_4": "Do not call any /download URL or fetch raw CSV/Arbin content. Stop on any duplicate, missing field, ID mismatch, non-2xx, HTML, or missing entity fingerprint.",
+    "authorized_to_execute_now": false
+  },
+  "prohibited_actions_confirmed": {
+    "second_test_entry_opened": false,
+    "curl_or_guessed_api_used": false,
+    "download_link_clicked_or_called": false,
+    "raw_csv_or_arbin_accessed": false,
+    "file_metadata_endpoint_manually_called": false,
+    "v11_or_provenance_changed": false,
+    "training_run": false
+  },
+  "state": {
+    "official_continuation_cells": 5,
+    "official_cycle_life_eol_cells": 0,
+    "direct_crossing_cells": 0,
+    "candidate_cells_still_right_censored": 36,
+    "known_early_terminated_cells_still_right_censored": 5,
+    "v11_valid_for_training": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "protocols": {
+    "mit_stanford_fast_charge": {
+      "cycle_life": "official per-cell cycle_life descriptor",
+      "eol_threshold": "0.88 Ah, equal to 80% of 1.1 Ah nominal capacity",
+      "cycle_count_origin": "1-based physical cycle count; cycle 1 trace omitted, observed traces begin at cycle 2",
+      "sampling_protocol": "approximately every physical cycle"
+    },
+    "oxford_battery_degradation_1": {
+      "cycle_life": "first observed cycle where capacity/first-complete-cycle capacity <= 0.80",
+      "eol_threshold": "80% of each cell's first complete observed-cycle capacity",
+      "cycle_count_origin": "physical cycle counter begins at 0 in the canonical source",
+      "sampling_protocol": "diagnostic observations approximately every 100 physical cycles"
+    }
+  },
+  "same_numeric_unit": "physical cycles",
+  "same_supervised_task": false,
+  "noncomparability_reasons": [
+    "different EOL capacity reference (nominal versus first observed cycle)",
+    "different observation cadence (about 1 versus 100 cycles)",
+    "substantially different lifetime ranges and cell domains"
+  ]
+}

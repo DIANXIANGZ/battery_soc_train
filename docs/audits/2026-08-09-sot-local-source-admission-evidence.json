@@ -1,0 +1,88 @@
+{
+  "audit_id": "2026-08-09-sot-local-source-admission",
+  "target": "sot",
+  "decision": "NOT_VERIFIABLE",
+  "stop_point": "LICENSE_VERSION_BINDING_NOT_VERIFIABLE",
+  "candidate_roots": [
+    "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_0c",
+    "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_25c",
+    "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_50c",
+    "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_temperature"
+  ],
+  "entities": [
+    {
+      "source_id": "calce_a123_dynamic_0c",
+      "manifest_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_0c/download_manifest.json",
+      "manifest_sha256": "1284b0e56462be88f537f4da60db9f67ed3f0514ee5968282038bc05cdaab26b",
+      "archive_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_0c/A123_DST-US06-FUDS-0.zip",
+      "archive_bytes": 13077073,
+      "archive_sha256": "c18df3909de27c4409d5e9730c5078284f3883ee52193b559ca8e0ee17732505",
+      "members": ["DST-US06-FUDS-0/", "DST-US06-FUDS-0/A1-007-DST-US06-FUDS-0-20120813.xlsx", "DST-US06-FUDS-0/A1-008-DST-US06-FUDS-0-20120813.xlsx", "DST-US06-FUDS-0/~$A1-007-DST-US06-FUDS-0-20120813.xlsx"]
+    },
+    {
+      "source_id": "calce_a123_dynamic_25c",
+      "manifest_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_25c/download_manifest.json",
+      "manifest_sha256": "a170ba2a1dedd0c00b395996bfdb65f030b83cbd50f4c936f0c254c96b8fd678",
+      "archive_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_25c/A123_DST-US06-FUDS-25.zip",
+      "archive_bytes": 13787570,
+      "archive_sha256": "b7e5402815b491f4052e1fc02ac12723a28a6893e3f695f10a39b773043145f2",
+      "members": ["DST-US06-FUDS-25/", "DST-US06-FUDS-25/A1-007-DST-US06-FUDS-25-20120827.xlsx", "DST-US06-FUDS-25/A1-008-DST-US06-FUDS-25-20120827.xlsx"]
+    },
+    {
+      "source_id": "calce_a123_dynamic_50c",
+      "manifest_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_50c/download_manifest.json",
+      "manifest_sha256": "01ef948ac1048ea008134aa9ec4f371890b75f341222d1825f6b1f5a4848ad50",
+      "archive_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_50c/A123_DST-US06-FUDS-50.zip",
+      "archive_bytes": 14007462,
+      "archive_sha256": "7fae05b50c7f4edcc799a7d817d56fb701e1e8894b538e043d05d08ab60f91bc",
+      "members": ["DST-US06-FUDS-50/", "DST-US06-FUDS-50/A1-007-DST-US06-FUDS-50-20120824.xlsx", "DST-US06-FUDS-50/A1-008-DST-US06-FUDS-50-20120824.xlsx"]
+    },
+    {
+      "source_id": "calce_a123_dynamic_temperature",
+      "manifest_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_temperature/download_manifest.json",
+      "manifest_sha256": "2de6e50ccfee6f631ca7c305b04d2ba433c053966feb0cc93bb060acea0a2db6",
+      "archive_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/calce_a123_dynamic_temperature/A123_DST-US06-FUDS-N10.zip",
+      "archive_bytes": 9213655,
+      "archive_sha256": "1753bbf603baf54388ea2fee28f3be00c082e525515efb2074f362f335988604",
+      "members": ["DST-US06-FUDS-N10/", "DST-US06-FUDS-N10/A1-007-DST-US06-FUDS-N10-20120829.xlsx", "DST-US06-FUDS-N10/A1-008-DST-US06-FUDS-N10-20120829.xlsx"]
+    }
+  ],
+  "manifest_binding": {
+    "archive_name_size_sha_match_count": 4,
+    "archive_count": 4,
+    "status": "PASS"
+  },
+  "license_version": {
+    "manifest_license_text": "Research/publication use with CALCE database and article attribution",
+    "independent_license_snapshot_path": null,
+    "version_text": "CALCE A123 archive, accessed 2026-08-03",
+    "status": "NOT_VERIFIABLE",
+    "reason": "Usage description is not a version-bound license snapshot, and access date is not an immutable source release identifier."
+  },
+  "schema_header": {
+    "xlsx_data_members": 8,
+    "physical_tokens_from_names": ["A1-007", "A1-008"],
+    "conditions_from_names": ["N10", "0", "25", "50"],
+    "channel_header": ["Data_Point", "Test_Time(s)", "Date_Time", "Step_Time(s)", "Step_Index", "Cycle_Index", "Current(A)", "Voltage(V)", "Charge_Capacity(Ah)", "Discharge_Capacity(Ah)", "Charge_Energy(Wh)", "Discharge_Energy(Wh)", "dV/dt(V/s)", "Internal_Resistance(Ohm)", "Is_FC_Data", "AC_Impedance(Ohm)", "ACI_Phase_Angle(Deg)", "Temperature (C)_1"],
+    "compact_header": ["Test_Time(s)", "Step_Time(s)", "Step_Index", "Current(A)", "Voltage(V)", "Temperature (C)_1"],
+    "status": "HEADER_PRESENT_NO_SAMPLE_ROWS_READ"
+  },
+  "forbidden_semantic_scan": {
+    "surfaces": ["archive member logical paths", "download manifest source fields", "sheet names and first-row headers"],
+    "tokens": ["rul", "rul_cycles", "rul_observed", "eol", "eol_*", "trajectory", "trajectory_*"],
+    "hits": 0,
+    "status": "PASS"
+  },
+  "frozen_root_control": {
+    "ledger_path": "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/2026-08-09-frozen-rul-asset-denylist.json",
+    "ledger_sha256": "44c5b5b1fe3bafb4d6c1e76d426f26d68a9868bf52c8ddeb31b33afde316d348",
+    "ledger_version": "2026-08-09.p0-2.1",
+    "entry_count": 13,
+    "candidate_root_match_count": 0,
+    "status": "PASS_METADATA_ONLY"
+  },
+  "sample_rows_read": 0,
+  "frozen_asset_contents_read": false,
+  "next_step_authorized": false,
+  "minimal_next_evidence": "Provide a local, immutable license snapshot explicitly bound to these four CALCE archive entities and a stable source release/version identifier; then repeat the SOT-only source gate."
+}

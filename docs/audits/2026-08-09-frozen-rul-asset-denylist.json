@@ -1,0 +1,138 @@
+{
+  "ledger_id": "frozen-rul-asset-denylist",
+  "version": "2026-08-09.p0-2.1",
+  "updated_at": "2026-08-09T00:00:00+08:00",
+  "status": "FROZEN_DENY",
+  "path_normalization": [
+    "resolve(strict=False)",
+    "Unicode NFC",
+    "platform path separator normalization"
+  ],
+  "match_rule": "FAIL when a candidate source entity equals a canonical_root or is its descendant; a file root matches only that exact file",
+  "unknown_external_root_policy": "FAIL_CLOSED",
+  "scope": "Candidate source/archive/member/lineage inputs only; project code, tests, configs, new non_rul candidate roots and this control ledger are not candidate source entities.",
+  "entries": [
+    {
+      "asset_id": "nasa_multistate_raw_mixed_rul",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/03_NASA_PCoE_多状态原始数据",
+      "asset_category": "RUL-mixed raw source",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/2026-08-09-non-rul-target-precheck.md"
+      ]
+    },
+    {
+      "asset_id": "matr_batch1_rul_source",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/mit_stanford_fast_charge",
+      "asset_category": "frozen RUL/v11 source",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/v11_rul_final_data_admission.md"
+      ]
+    },
+    {
+      "asset_id": "matr_batch2_rul_source",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/mit_stanford_fast_charge_batch2",
+      "asset_category": "frozen RUL/v11 continuation source",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/v11_rul_final_data_admission.md"
+      ]
+    },
+    {
+      "asset_id": "oxford_rul_source",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/04_公开电池数据集/oxford_battery_degradation_1",
+      "asset_category": "frozen interval/grid RUL source",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/2026-08-09-rul-admission-chief-engineer-decision-package.md"
+      ]
+    },
+    {
+      "asset_id": "interval_rul_archive",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/Battery raw data.zip",
+      "asset_category": "frozen interval-RUL archive file",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/2026-08-09-rul-admission-chief-engineer-decision-package.md"
+      ]
+    },
+    {
+      "asset_id": "interval_rul_extracted_root",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/Battery raw data",
+      "asset_category": "frozen interval-RUL extracted source",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/2026-08-09-rul-admission-chief-engineer-decision-package.md"
+      ]
+    },
+    {
+      "asset_id": "nasa_five_state_rul_mixed_training",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/02_NASA_五状态训练数据",
+      "asset_category": "RUL-mixed derived training data",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/2026-08-09-non-rul-target-precheck.md"
+      ]
+    },
+    {
+      "asset_id": "nasa_lifecycle_training",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/03_NASA_生命周期训练数据",
+      "asset_category": "lifecycle/RUL derived training data",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/2026-08-09-rul-admission-chief-engineer-decision-package.md"
+      ]
+    },
+    {
+      "asset_id": "all_public_corpus_versions_including_v9_v10_v11",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/04_公开电池规范数据",
+      "asset_category": "mixed public corpus root; includes INVALIDATED v9/v10 and frozen v11",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/04_公开电池规范数据/public_battery_corpus_v9/INVALIDATED.json",
+        "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/04_公开电池规范数据/public_battery_corpus_v10/INVALIDATED.json",
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/v11_rul_final_data_admission.md"
+      ]
+    },
+    {
+      "asset_id": "all_public_corpus_quality_reports_including_v9_v10_v11",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/05_公开电池数据质量报告",
+      "asset_category": "mixed corpus audit root; includes INVALIDATED v9/v10 and frozen v11",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/05_公开电池数据质量报告/public_battery_corpus_v9/INVALIDATED.json",
+        "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/05_公开电池数据质量报告/public_battery_corpus_v10/INVALIDATED.json",
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/v11_rul_final_data_admission.md"
+      ]
+    },
+    {
+      "asset_id": "nasa_five_state_historical_results",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/03_模型与实验结果/04_NASA_五状态模型与结果",
+      "asset_category": "historical mixed state/lifecycle/RUL results",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/2026-08-09-rul-admission-chief-engineer-decision-package.md"
+      ]
+    },
+    {
+      "asset_id": "historical_strict_smoke_results",
+      "canonical_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/04_训练结果",
+      "asset_category": "historical strict smoke results including v9/v10 RUL outputs",
+      "current_status": "FROZEN_DENY",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/strict_smoke_v9_seed_43_invalidation.json",
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/strict_smoke_v10_seed_43_invalidation.json"
+      ]
+    },
+    {
+      "asset_id": "v11_local_endpoint_evidence_tmp",
+      "canonical_root": "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/tmp",
+      "asset_category": "temporary evidence root containing frozen v11/RUL endpoint artifacts",
+      "current_status": "FROZEN_DENY_AS_CANDIDATE_SOURCE",
+      "evidence_paths": [
+        "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/v11_rul_final_data_admission.md"
+      ]
+    }
+  ]
+}

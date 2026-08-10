@@ -1,0 +1,41 @@
+{
+  "created_at_utc": "2026-08-04T08:24:05Z",
+  "status": "RED_CONFIRMED",
+  "command": "/opt/homebrew/bin/python3.12 -m pytest -q tests/test_public_battery_adapters.py -k 'official_continuation_mapping_is_exact or eol_classification_distinguishes or continuation_requires_contiguous or cycle_table_preserves_eol or v11_batch2_manifest_requires'",
+  "exit_code": 1,
+  "summary": "Initial behavior run: 5 failed, 17 deselected in 0.28s. Precise-RUL supervision run: 1 failed, 22 deselected in 0.33s. Adapter integration run: 1 failed, 23 deselected in 0.26s. Provenance-gate run: 1 failed, 24 deselected in 0.26s.",
+  "expected_failures": [
+    {
+      "test": "test_matr_official_continuation_mapping_is_exact_and_guess_is_rejected",
+      "evidence": "official continuation mapping validator is absent"
+    },
+    {
+      "test": "test_matr_eol_classification_distinguishes_continuation_censoring_and_crossing",
+      "evidence": "MATR EOL classifier is absent"
+    },
+    {
+      "test": "test_matr_continuation_requires_contiguous_length_and_authoritative_cycle_life",
+      "evidence": "continuation structure and authoritative cycle-life gate is absent"
+    },
+    {
+      "test": "test_cycle_table_preserves_eol_observation_and_provenance",
+      "evidence": "official continuation was reduced to rul_observed=0 because eol observation metadata was dropped"
+    },
+    {
+      "test": "test_v11_batch2_manifest_requires_exact_official_evidence_and_archive_identity",
+      "evidence": "official Batch 2 manifest and archive identity validators are absent"
+    },
+    {
+      "test": "test_experiment_table_exposes_only_observed_rows_as_precise_rul_supervision",
+      "evidence": "experiment table drops rul_observed and eol_provenance, so precise supervision cannot be audited"
+    },
+    {
+      "test": "test_stanford_loader_appends_only_official_continuation_with_observed_provenance",
+      "evidence": "Stanford loader has no continuation_path contract and cannot append the official Batch 2 trajectory"
+    },
+    {
+      "test": "test_v11_gate_counts_three_rul_provenance_classes_and_rejects_censored_supervision",
+      "evidence": "v11 has no three-class cell/row gate and no explicit rejection of censored exact-RUL supervision"
+    }
+  ]
+}

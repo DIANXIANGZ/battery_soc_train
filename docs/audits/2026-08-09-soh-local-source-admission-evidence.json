@@ -1,0 +1,61 @@
+{
+  "audit_id": "2026-08-09-soh-local-source-admission",
+  "target": "soh",
+  "decision": "FAIL",
+  "stop_point": "SOURCE_ENTITY_ABSENT",
+  "candidate_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/02_Stanford_LFP_SOC_2025/raw",
+  "evidence": [
+    {
+      "kind": "license_file",
+      "path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/02_Stanford_LFP_SOC_2025/raw/LICENSE",
+      "bytes": 1065,
+      "sha256": "c41fe9f8ebd7557555b998d212861b322754fffb581a06185ee64bdff259ff58",
+      "status": "NOT_VERIFIABLE_FOR_DATA",
+      "note": "MIT text grants rights for software and associated documentation; no local binding proves coverage of a data entity."
+    },
+    {
+      "kind": "source_readme",
+      "path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/01_原始数据/02_Stanford_LFP_SOC_2025/raw/README.md",
+      "bytes": 4417,
+      "sha256": "78d184d50a6e7b4a99bd32ef7c25030a467b2b708e0c67b2dd42ceff55890593",
+      "status": "DESCRIPTION_ONLY",
+      "note": "Describes intended raw-data folders and DOI, but those entities are absent from the local root."
+    },
+    {
+      "kind": "source_manifest",
+      "path": null,
+      "sha256": null,
+      "status": "MISSING"
+    },
+    {
+      "kind": "raw_entity_inventory",
+      "files": ["LICENSE", "README.md"],
+      "data_entity_count": 0,
+      "status": "FAIL"
+    },
+    {
+      "kind": "schema_header",
+      "headers": [],
+      "status": "NOT_VERIFIABLE_NO_DATA_ENTITY"
+    },
+    {
+      "kind": "frozen_root_control",
+      "ledger_path": "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/2026-08-09-frozen-rul-asset-denylist.json",
+      "ledger_sha256": "44c5b5b1fe3bafb4d6c1e76d426f26d68a9868bf52c8ddeb31b33afde316d348",
+      "ledger_version": "2026-08-09.p0-2.1",
+      "entry_count": 13,
+      "candidate_root_match_count": 0,
+      "status": "PASS_METADATA_ONLY"
+    }
+  ],
+  "forbidden_semantic_scan": {
+    "surfaces": ["local relative paths", "available source README/license metadata"],
+    "tokens": ["rul", "rul_cycles", "rul_observed", "eol", "eol_*", "trajectory", "trajectory_*"],
+    "hits": 0,
+    "status": "PASS_ON_AVAILABLE_METADATA_ONLY"
+  },
+  "sample_rows_read": 0,
+  "frozen_asset_contents_read": false,
+  "next_step_authorized": false,
+  "minimal_next_evidence": "Provide an existing local raw data entity plus a version-bound data license snapshot, source/download manifest, entity inventory and entity SHA-256; then repeat this target-only source audit."
+}

@@ -1,0 +1,52 @@
+{
+  "audit": "v11_matr_raw_csv_arbin_falsification",
+  "recorded_at_local": "2026-08-04T17:01:07+08:00",
+  "status": "BLOCKED_CONTROLLED_RETRY_NONFINAL_HTTP",
+  "scope": "official_sources_only",
+  "attempted_official_endpoints": [
+    "https://data.matr.io/1/api/v1/edp/batches/5c86c0b5fa2ede00015ddf67",
+    "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67",
+    "https://data.matr.io/1/api/v1/edp/batches/5c86c0b5fa2ede00015ddf67/files",
+    "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/files",
+    "https://data.matr.io/1/",
+    "https://api.github.com/repos/rdbraatz/data-driven-prediction-of-battery-cycle-life-before-capacity-degradation/issues/9/comments"
+  ],
+  "observed_error": "curl exit 35: LibreSSL SSL_connect: SSL_ERROR_SYSCALL; MATR requests returned HTTP 000; GitHub API request in the same attempt also failed TLS",
+  "single_controlled_retry": {
+    "approved": true,
+    "start_utc": "2026-08-04T09:02:10Z",
+    "end_utc": "2026-08-04T09:02:12Z",
+    "url": "https://data.matr.io/1/api/v1/edp/batches/5c86c0b5fa2ede00015ddf67",
+    "curl_exit_code": 0,
+    "tls": "TLSv1.3 / AEAD-AES128-GCM-SHA256; certificate CN=*.matr.io; issuer Amazon RSA 2048 M01",
+    "http_status": 301,
+    "content_length": 0,
+    "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "response_version_headers": {
+      "server": "AmazonS3",
+      "location": "https://data.matr.io/1/#api/v1/edp/batches/5c86c0b5fa2ede00015ddf67",
+      "x_cache": "Miss from cloudfront",
+      "via": "CloudFront",
+      "date": "Tue, 04 Aug 2026 09:02:13 GMT"
+    },
+    "redirect_followed": false,
+    "result": "No verifiable metadata body was returned. The one-request retry allowance was consumed; no second request was made."
+  },
+  "gate_decision": {
+    "stopped_immediately": true,
+    "retry_performed": true,
+    "mirror_or_substitute_used": false,
+    "candidate_cells_promoted": 0,
+    "official_cycle_life_eol_authorized": false,
+    "v11_valid_for_training": false,
+    "smoke_training_authorized": false,
+    "formal_training_authorized": false
+  },
+  "current_counts": {
+    "official_continuation_cells": 5,
+    "official_cycle_life_eol_candidate_cells_still_right_censored": 36,
+    "known_early_terminated_right_censored_cells": 5,
+    "direct_crossing_cells": 0
+  },
+  "minimum_next_step_requiring_approval": "No further endpoint access is authorized. Keep all 36 candidates and 5 known early terminations right-censored unless the chief engineer issues a new explicit instruction."
+}

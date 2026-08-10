@@ -1,0 +1,26 @@
+{
+  "audit_date": "2026-08-04",
+  "source": "oxford_battery_degradation_1",
+  "training_performed": false,
+  "cells": 8,
+  "observations": 519,
+  "observation_step_counts_cycles": {
+    "100": 470,
+    "200": 40,
+    "300": 1
+  },
+  "median_observation_step_cycles": 100,
+  "one_cycle_step_observations": 0,
+  "rul_labels_multiple_of_100_fraction": 1.0,
+  "minimum_nonzero_rul_label_spacing_cycles": 100,
+  "eol_crossing_interval_widths_cycles": {
+    "100": 4,
+    "200": 4
+  },
+  "eol_observability": "The true 80% crossing is only bracketed between the last above-threshold diagnostic observation and the first below-threshold observation; no exact physical crossing cycle is observed.",
+  "cycle_level_prediction_identifiable": false,
+  "reason": "The requested <=1 cycle error is 100 times finer than the median label grid and 100-200 times finer than the observed EOL interval for every cell.",
+  "single_root_cause_hypothesis": "Oxford RUL cannot be validated to one-cycle accuracy from this canonical source because the target itself is interval-censored at 100-200 physical cycles, independent of model capacity.",
+  "minimum_falsifiable_test": "Locate an authoritative Oxford source field or higher-resolution archive containing the exact physical EOL crossing cycle. Reject the hypothesis only if such a field exists and is independently traceable; otherwise Oxford must not be used for <=1-cycle point-accuracy acceptance.",
+  "allowed_use_without_relaxing_threshold": "Use Oxford only as a separate interval-censored or 100-cycle-grid diagnostic task, or exclude it from the <=1-cycle acceptance dataset and acquire a higher-resolution lifecycle source. Do not average it with MATR and do not reinterpret interval results as one-cycle accuracy."
+}

@@ -1,0 +1,37 @@
+{
+  "audit_version": 1,
+  "created_at_utc": "2026-08-04T08:24:05Z",
+  "status": "SOURCE_VERIFIED_NOT_YET_ADMITTED",
+  "training_authorized": false,
+  "source": {
+    "project_id": "5c48dd2bc625d700019f3204",
+    "batch_id": "5c86bf14fa2ede00015ddd83",
+    "file_id": "5c86bf13fa2ede00015ddd82",
+    "filename": "2017-06-30_batchdata_updated_struct_errorcorrect.mat",
+    "byte_count": 2007331155,
+    "sha256": "63ab200d09ecb237fee5ef3a5c5db76e3212e3206a0bd92f769e1427fed338b8",
+    "license_label": "CC BY 4",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "official_mapping_reference": {
+    "repository": "https://github.com/rdbraatz/data-driven-prediction-of-battery-cycle-life-before-capacity-degradation",
+    "commit": "1ef13d27c66dc3d73affdaa008fbeba5687b2ea4",
+    "file": "LoadData.m",
+    "file_sha256": "7914333f0a963a0742d9fff340f1d4bc2ad912f1b04a236b3ae6c39fedd3623d",
+    "matlab_batch2_indices_1_based": [8, 9, 10, 16, 17],
+    "python_batch2_indices_0_based": [7, 8, 9, 15, 16],
+    "batch1_cell_ids": ["b1c0", "b1c1", "b1c2", "b1c3", "b1c4"],
+    "official_add_len": [661, 980, 1059, 207, 481]
+  },
+  "structure_checks": {
+    "root_keys": ["#refs#", "#subsystem#", "batch", "batch_date"],
+    "batch_cell_count": 48,
+    "required_fields_present": true,
+    "mapped_cycle_counts": [662, 981, 1060, 208, 482],
+    "mapped_cycle_counts_equal_official_add_len_plus_one": true,
+    "mapped_cycle_life_values": [663, 982, 1061, 209, 483],
+    "mapped_last_qdischarge_ah": [0.88280821, 0.88000232, 0.88067055, 0.88012493, 0.88004041],
+    "mapped_policy_readable": ["80%)-3.6C", "80%)-3.6C", "80%)-3.6C", "80%)-4C", "80%)-4C"]
+  },
+  "admission_note": "The official source, license, file identity, HDF5 structure, and continuation mapping are verified. Admission still requires TDD-protected adapter changes, v11 rebuild, and all data/leakage gates."
+}

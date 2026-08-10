@@ -1,0 +1,149 @@
+{
+  "audit": "v11_matr_b1c31_canonical_detail_final_curl_request",
+  "status": "PASS_RESPONSE_GATES_SCHEMA_INSUFFICIENT_FOR_TERMINATION_REASON",
+  "scope": "One final approved GET to the same b1c31 canonical detail JSON using the previously successful cURL/TLS stack; schema and termination-semantics evidence only",
+  "client": {
+    "curl_version": "8.7.1",
+    "libcurl_version": "8.7.1",
+    "platform": "x86_64-apple-darwin25.0",
+    "tls_backends": [
+      "SecureTransport",
+      "LibreSSL/3.3.6"
+    ],
+    "http2_library": "nghttp2/1.68.1",
+    "automatic_retry_enabled": false,
+    "follow_redirects_enabled": false,
+    "proxy_used": false,
+    "alternate_client_or_second_request_used": false
+  },
+  "request": {
+    "method": "GET",
+    "start_utc": "2026-08-04T12:42:01.610155Z",
+    "end_utc": "2026-08-04T12:42:03.247086Z",
+    "requested_url": "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests/5c86c0bdfa2ede00015ddf71",
+    "final_url": "https://data.matr.io/1/api/v1/edp/projects/5c48dd2bc625d700019f3204/batches/5c86c0b5fa2ede00015ddf67/tests/5c86c0bdfa2ede00015ddf71",
+    "curl_exit_code": 0,
+    "redirect_count": 0,
+    "time_total_seconds": 1.626743
+  },
+  "transport": {
+    "http_status": 200,
+    "http_version": "2",
+    "content_type": "application/json",
+    "tls_protocol": "TLSv1.3",
+    "tls_cipher": "AEAD-AES128-GCM-SHA256",
+    "alpn_offered": "h2,http/1.1",
+    "alpn_selected": "h2",
+    "ssl_verify_result": 0,
+    "certificate_subject": "CN=*.matr.io",
+    "certificate_issuer": "C=US; O=Amazon; CN=Amazon RSA 2048 M01",
+    "certificate_start": "Jun 26 00:00:00 2026 GMT",
+    "certificate_expiry": "Jan 9 23:59:59 2027 GMT"
+  },
+  "entity_fingerprint": {
+    "etag": "\"dedafc681907db8133582a2755e08c94\"",
+    "last_modified": "Wed, 12 Feb 2020 14:54:53 GMT",
+    "content_length_header": 10411,
+    "byte_count": 10411,
+    "sha256": "b38738be3f687b5e11b88f01d85832e484ace66f4df3445885077fc81a59a608",
+    "complete": true
+  },
+  "identity_binding": {
+    "binding_rule": "The accepted hierarchical project binding is carried by the exact canonical URL; the entity must bind the exact Batch1 batchId, b1c31 testId, barcode and channel.",
+    "url_project_id": "5c48dd2bc625d700019f3204",
+    "url_batch_id": "5c86c0b5fa2ede00015ddf67",
+    "url_test_id": "5c86c0bdfa2ede00015ddf71",
+    "entity_project_id": null,
+    "entity_batch_id": "5c86c0b5fa2ede00015ddf67",
+    "entity_test_id": "5c86c0bdfa2ede00015ddf71",
+    "entity_cell_id_barcode": "EL150800460481",
+    "entity_channel": 36,
+    "expected_local_cell_id": "b1c31",
+    "entity_name": "2017-05-12_6C-50per_3_6C_CH36",
+    "pass": true
+  },
+  "schema": {
+    "_id": "string",
+    "access": {
+      "groups": "array<object{id:string, level:integer, flags:array}>",
+      "users": "array<object{id:string, level:integer, flags:array}>"
+    },
+    "batchId": "string",
+    "batteryType": "string",
+    "cellId": "string",
+    "channel": "string",
+    "dataFileId": "string",
+    "metaDataFileId": "string",
+    "name": "string",
+    "owner": "string",
+    "public": "boolean",
+    "scheduleFileId": "string",
+    "startDate": "string",
+    "summary": {
+      "Discharge capacity vs cycle number": {
+        "x": {
+          "label": "string"
+        },
+        "y": {
+          "data": "array<float>[877]",
+          "label": "string",
+          "range": "array<float>[2]"
+        }
+      }
+    }
+  },
+  "termination_semantics": {
+    "searched_field_name_tokens": [
+      "termination",
+      "eol",
+      "end",
+      "stop",
+      "early",
+      "reason",
+      "status",
+      "complete",
+      "failure",
+      "comment"
+    ],
+    "matching_fields": {},
+    "explicit_termination_reason_present": false,
+    "explicit_eol_terminal_workflow_present": false,
+    "sufficient_to_distinguish_termination_reason": false,
+    "interpretation_boundary": "No conclusion about EOL or termination cause is drawn from absent fields. The capacity summary is not treated as terminal-protocol metadata, and no raw values or files were accessed."
+  },
+  "gate_result": {
+    "curl_exit_zero": true,
+    "http_2xx": true,
+    "json_content_type": true,
+    "no_redirect_and_exact_url": true,
+    "entity_fingerprint_complete": true,
+    "project_batch_test_b1c31_binding_pass": true,
+    "schema_evidence_admitted": true,
+    "termination_reason_adjudicable": false
+  },
+  "prohibited_actions_confirmed": {
+    "request_count_more_than_one": false,
+    "retry_enabled_or_performed": false,
+    "redirect_followed": false,
+    "url_protocol_or_host_changed": false,
+    "proxy_or_mirror_used": false,
+    "other_detail_endpoint_accessed": false,
+    "file_endpoint_accessed": false,
+    "download_endpoint_accessed": false,
+    "raw_csv_or_arbin_accessed": false,
+    "v11_or_provenance_changed": false,
+    "training_run": false
+  },
+  "state_after_audit": {
+    "v11_valid_for_training": false,
+    "official_continuation_cells": 5,
+    "official_cycle_life_eol_cells": 0,
+    "observed_eol_crossing_cells": 0,
+    "candidate_cells_still_right_censored": 36,
+    "known_early_terminated_cells_still_right_censored": 5,
+    "provenance_changed": false,
+    "training_run": false
+  },
+  "decision": "The one final cURL response is admitted as fingerprinted schema evidence, but the detail schema contains no explicit termination-reason or EOL-terminal-workflow metadata and is insufficient to distinguish termination cause. The network retry route is now closed. All 36 candidates and 5 known early terminations remain right-censored.",
+  "minimum_next_step_requiring_explicit_approval": "Any different evidence source, provenance change, v11 rebuild, smoke test or training requires a separate chief-engineer approval. No more same-kind detail network retries are permitted."
+}

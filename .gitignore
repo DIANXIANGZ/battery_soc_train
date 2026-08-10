@@ -1,0 +1,25 @@
+# macOS and Python caches
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local environments
+.venv/
+venv/
+env/
+
+# Local data, generated results, and temporary evidence
+data/
+results/
+artifacts/
+outputs/
+tmp/
+
+# Oversized audit export; retain the surrounding audit documentation
+docs/audits/v10_phase12_pretraining/soc_soe_physics_rows.csv
+
