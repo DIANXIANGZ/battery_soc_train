@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "archive_id": "non-rul-four-target-completion-2026-09-23",
+  "status": "COMPLETE_FOUR_TARGET_SCOPED_BASELINES",
+  "scope": "read-only consolidation of four independently scoped PyTorch formal results",
+  "base_commit": "1ea62b74293e11ae9dd0aff698a1cf9a92ed0335",
+  "archive_action": {
+    "training_rerun": false,
+    "data_version_modified": false,
+    "historical_reports_overwritten": false,
+    "git_write": false,
+    "rul_or_frozen_assets_read_or_mixed": false
+  },
+  "targets": {
+    "soc": {
+      "status": "PYTORCH_FORMAL_PASS_SCOPED",
+      "scope": "LGHG2_001 single seen cell; six complete-condition holdouts; no unseen-cell or cross-source claim",
+      "model": "torch.nn.Linear(4,1) closed-form Ridge alpha=1",
+      "dataset_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/05_非RUL独立候选/soc-lightweight-condition-v1-2026-08-27/soc-baseline-v1",
+      "dataset_sha256": {
+        "READY.json": "af174d4890b00ddc117cbac65c5f469613f286c3303ed274dcdf06b15629d7c6",
+        "manifest.json": "fc5c900fd8377699df05f0344a2a70d9bf10ed90fe5b10b49fff5d9436346289",
+        "samples.csv": "78dc6896c6ba7c98622002a3e72307b48aa809e801b5fc2439ada5950e59a5ec",
+        "source_files.csv": "e51db9747c91161dc1bceec2d95c8cc7b81f54e63110122e1b7a30dd11851e03"
+      },
+      "code_config": {
+        "runner_path": "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/.superpowers/sdd/2026-09-22-soc-pytorch-linear/soc_pytorch_linear_train.py",
+        "runner_sha256": "0b76356d804d4257fd423c5efafc0dfb249ce0d3b9082f34e0551864d77f79d0",
+        "config_path": "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/configs/training/non_rul_baseline/soc-pytorch-linear-formal.json",
+        "config_sha256": "cb1c3cb72d3be2d8e694c0109576751e7f1e5dde7b3ecd8cf463538220aab501"
+      },
+      "result_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/03_模型与实验结果/07_SOC轻量基线/soc-lightweight-condition-v1-2026-08-27/pytorch-linear-formal-v1",
+      "result_sha256": {
+        "models.pt": "e28138d9eaa8c3f2845a2bb5a59cbfe2b8a1652b969f2e264a1f7c3720196567",
+        "fold_metrics.json": "0493b8ca90831309b96aea284e2f9a446c3e1a153ef06113c69811c51ac3209f",
+        "predictions.csv": "2c507f79e45059469465afcbda95a94020a35da130fd9e2a1a2ace370ba56e94",
+        "training.log": "c5d7cdd216595da712249c2febd567f3a51048652706a689d25975851b1b1403",
+        "run_manifest.json": "68c2a2e4bbab37a60a6c95fb55ad4d8c8b517f87991e7fd00f0ad01928dbdf7b"
+      },
+      "metrics": {"test_rows": 411135, "macro_mae": 0.00000305958233824622, "macro_rmse": 0.000003850856181081782}
+    },
+    "system_soe": {
+      "status": "PYTORCH_FORMAL_PASS_SCOPED",
+      "scope": "Zenodo 8381142 community storage system only; not cell-level or unseen-cell generalization",
+      "label": "soe_source_value",
+      "label_unit": "unspecified_source_unit",
+      "model": "CPU torch.nn.Linear(3,1) least squares",
+      "dataset_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/05_非RUL独立候选/system_soe-baseline-v1",
+      "dataset_sha256": {
+        "READY.json": "c18455709c3c7977e2c81ebcca95bf4d4de427f117d820a5f515fe44d2c6d6cf",
+        "manifest.json": "72c4cb27e018c8e6fc592fe924ef79316dd29b175a6f51c6d06bf39dc4570a90",
+        "samples.csv": "d6abe22b5b3040bb39977263bfb40f1e2e77106f6e9ab7e600784513ee0b0e8e",
+        "source_files.csv": "8e4ef51edcf3e74d1ab5cd2bc77a734b14335dd31b04f192a64995e3f35b1601"
+      },
+      "code_config": {
+        "adapter_path": "src/data_processing/non_rul_baseline/system_soe.py",
+        "adapter_sha256": "cd4d06d349eca36e8e15b76274068e62d74f1419322c13643e4dde808e3b4450",
+        "runner_path": ".superpowers/sdd/2026-09-22-system-soe-pytorch/system_soe_pytorch_train.py",
+        "runner_sha256": "dda74e90c9a06e099d15b84d1b5302b44f42e07852d51da2c52171fa04c572ab",
+        "config_path": "configs/training/non_rul_baseline/system-soe-pytorch-linear-formal.json",
+        "config_sha256": "a8892c2cf159e88c2d2c9c6cf6ff45bb822eb84f24515234d7cc01443cf72e63"
+      },
+      "report_path": "docs/audits/2026-09-23-system-soe-pytorch-formal-training.md",
+      "report_sha256": "ec69e9a5e86a1f88096c52500044b582882bdd2d83fd15c7875ac9cea16f17d0",
+      "result_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/03_模型与实验结果/08_系统SOE轻量基线/system_soe-baseline-v1/pytorch-linear-formal-v1",
+      "result_sha256": {
+        "metrics.json": "58b112ddce207cd763d83ab3a91608326789b88515e1bcdd5d16e44d1dff8f7a",
+        "model_state.pt": "06a56abff7ab3a0694f3216ec248614bfba5a57daaabcd0e70fea4b659f5403f",
+        "predictions.csv": "b9e4cc9f1a11b6f52b7ce11301e7e831e7fe8e0f3b7e02efa346f0c8d0c4fdb7",
+        "run_manifest.json": "693091d3f3b3a4683ed1089f219ea53eefdbbadbfe73746a8c2c29c5247d7ff9",
+        "training.log": "4c9108e08f0a33934fc830eac34550d2da2ee4250306e0adb80642073cfcf3be"
+      },
+      "metrics": {"train_rows": 21205, "test_rows": 4933, "train_groups": 238, "test_groups": 60, "mae": 13.538709044079217, "rmse": 16.552627288336616}
+    },
+    "soh": {
+      "status": "PYTORCH_FORMAL_PASS_SCOPED",
+      "scope": "UNIBO_CALIBRATION_CELL_001 single calibration cell trend only; no cross-cell claim",
+      "model": "torch.nn.Linear(1,1) SGD",
+      "dataset_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/05_非RUL独立候选/soh-single-cell-calibration-v1-2026-09-04/soh-baseline-v1",
+      "dataset_sha256": {
+        "READY.json": "ff2a3d99e7e6ac6e9bcede67316fb8e21000dcc80e366cad4814a70cc2f5f4a1",
+        "manifest.json": "55757ed28a1132c906da6aab0678d33f43cf1cbc258621a32072dbccf2caab7f",
+        "samples.csv": "8c14f158b25d632b1be904b06342a2321e84f736e0539c9415e2a700cbd5486b",
+        "source_files.csv": "e79f2b0796cbdc01808f1868bbe6f42e5b9d7db586b099e401a4aba6621ade59"
+      },
+      "code_config": {
+        "runner_path": "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/.superpowers/sdd/2026-09-20-soh-small-sample/soh_small_sample_train.py",
+        "runner_sha256": "f213c2222e6ad09b55f747886ad41b87ef467b1a90345f2c5b79ebd9d0718405",
+        "config_path": "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/configs/training/non_rul_baseline/soh-small-sample-pytorch-linear.json",
+        "config_sha256": "7ef93ff5f1e93c2a873d4d9b0b20c84d1476b50c23a330ea42bc2c7dda0c6859"
+      },
+      "report_path": "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/docs/audits/2026-09-20-plan-a-execution-summary.md",
+      "report_sha256": "4b8c6341ffcb21681e5ac750d68a5861e1c3263d39476370c96d022c5c9a92c5",
+      "result_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/03_模型与实验结果/09_SOH单电芯小样本基线/soh-single-cell-calibration-v1-2026-09-04/pytorch-linear-v1-formal-2026-09-20-v3",
+      "result_sha256": {
+        "model_state.pt": "9fcccdc715a7a27e931077e37efa9687d7dd6a8e8ae36c5599b52590f4d02063",
+        "metrics.json": "164076daf4e2f326faa84c083ed661c0ace357a68d10d1a8f438160b773d82da",
+        "predictions.csv": "458bd8fb92c8f785f4020f21f0997a6d6f3110463436a2409f73f72a6bd1b628",
+        "run_manifest.json": "eb7ccd8b88d16ceb360a3548073d89d77a0f109bd800604f85d8d623827eb02a",
+        "training.log": "4a73d6bb6467864a7da8852fed09af098aa6c13f8346c017fc526c458c28f5f9"
+      },
+      "metrics": {"train_rows": 17, "test_rows": 4, "test_mae": 0.003233805298805237, "test_rmse": 0.0032712346874177456}
+    },
+    "sot": {
+      "status": "PYTORCH_FORMAL_PASS_SCOPED",
+      "scope": "source-native-temperature pointwise baseline on seen cells/conditions only; not Celsius and no unseen-cell claim",
+      "model": "CPU torch.nn.Linear(2,1) torch.linalg.lstsq",
+      "dataset_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/05_非RUL独立候选/sot-lightweight-temperature-v1/sot-baseline-v1",
+      "dataset_sha256": {
+        "READY.json": "8125ca375d0c44014b9db221bb7d63d57462df975c3ca219eaa1585a009ba91a",
+        "manifest.json": "5a772d0e80885719b536f71a9d91278526350432747e5c5d10201344b806ade5",
+        "samples.csv": "12b3441797f972fda1d5ec640a7cd021f8dd4d7576caf02869903d0b67f3a767",
+        "source_files.csv": "2cadbe0752d09a30ccaa72cdbd438ff601fc96ba60d9aafa68effbd673e0f5e4"
+      },
+      "code_config": {
+        "adapter_path": "src/data_processing/non_rul_baseline/sot_lightweight.py",
+        "adapter_sha256": "5c3ee020e4ab15a000f5a532984e8dcfe38cdf91f862523adb082a7edcb35ea7",
+        "runner_path": "src/training/non_rul_baseline/sot_lightweight_pytorch.py",
+        "runner_sha256": "a8426bc477cb2a33b5e84295a8ffee12564e81ff41ceed0aba2ea2a9daa6b0bb",
+        "config_path": "configs/training/non_rul_baseline/sot-lightweight-pytorch-linear.json",
+        "config_sha256": "426caa483aa4e316f77c179faa1aa602b0b0448c894212bc35af222d11845e87"
+      },
+      "report_path": "docs/audits/2026-09-23-sot-lightweight-training-readiness.md",
+      "report_sha256": "fbdcb6e9bd815dc47236f7ad3bc304bb8060591b7d828b0fb76812b61ef2169f",
+      "result_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/03_模型与实验结果/07_SOT轻量基线/sot-lightweight-pytorch-v1/formal",
+      "result_sha256": {
+        "metrics.json": "b68e912eea9e018a00e6e6a94ad6bed6ff7050c05b213960518ffc38797f4cbc",
+        "model_state.pt": "181c11ed7d13466943e2ea3f4ae3fdc9cada557c32aa48ae31b19e5b3dd20a74",
+        "predictions.csv": "92aef8e10b77a5e419b5104f06f5dafd0c126d7bb076eaed3daf9ff173b02eb4",
+        "run_manifest.json": "448d9b3a9a4489d06ad038f6657b1738e19d0e8809a03dd170f5d3fc7eb135c",
+        "training.log": "ba5dc8ab70eb03dd7e33fe7da01eea7308ac72299a7b38d97404f769ffd2acb9"
+      },
+      "metrics": {"train_rows": 9693376, "test_rows": 1558205, "mae": 5.016611990628302, "rmse": 10.040537547113313}
+    }
+  },
+  "supplemental": {
+    "energy_proxy": {
+      "status": "FORMAL_PASS_NON_NATIVE_SUPPLEMENTAL_RESULT",
+      "native_soe": false,
+      "label": "discharge_energy_wh_cumulative",
+      "label_unit": "Wh",
+      "dataset_ready_sha256": "fde87f347d220407950519c0880ead7546912a568a461ead44b63bdf33023da3",
+      "dataset_manifest_sha256": "e90e6f362f1fad4611c836b89fbcbba23663ef2941d496dd0f99cbfb1bf71333",
+      "macro_mae": 1.7090776599216253,
+      "macro_rmse": 2.2324138623720438
+    },
+    "rul": {
+      "status": "FROZEN",
+      "read_or_mixed": false,
+      "denylist_sha256": "44c5b5b1fe3bafb4d6c1e76d426f26d68a9868bf52c8ddeb31b33afde316d348"
+    }
+  },
+  "historical_binding": {
+    "previous_final_readiness_json": "docs/audits/2026-09-23-non-rul-pytorch-final-readiness.json",
+    "previous_final_readiness_json_sha256": "7f974ec83266404228ad10d14d6f4eb62e739e3279f23f5d2eb7529a708bccb3",
+    "previous_final_readiness_review": "docs/audits/2026-09-23-non-rul-pytorch-final-readiness-review.md",
+    "previous_final_readiness_review_sha256": "f3067831d2244bca6d881b420a684fc0945b9f0a62143c74747f419496d97178",
+    "supersession_note": "历史归档曾记录SOT为BLOCKED；本归档只追加后续SOT READY、smoke和formal证据，不改写历史文件。"
+  },
+  "review": {
+    "test_engineer_thread": "01a047a6-1ecd-7242-bc50-d6b7f970e211",
+    "scope": "read-only document, path, hash and status review; no rerun",
+    "git_handoff_after_pass": true
+  }
+}
