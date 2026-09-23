@@ -19,6 +19,7 @@ from src.desktop.charts import ensure_run_charts
 from src.desktop.chart_viewer import InteractiveChartViewer
 from src.desktop.multistate_charts import build_multistate_charts
 from src.desktop.hybrid_charts import build_hybrid_charts
+from src.desktop.formal_baselines import build_formal_baseline_command, load_formal_baselines
 from src.desktop.theme import COLORS, configure_theme
 from src.desktop.training_controller import TrainingController, epoch_progress, smooth_progress_step
 from src.evaluation.nasa_lifecycle_experiments import result_dir_name
@@ -202,6 +203,7 @@ class DesktopTrainingApp:
         ttk.Button(navigation, text="导入自定义数据", style="Secondary.TButton", command=self.open_custom_dataset_dialog).pack(fill=tk.X, padx=16, pady=(0, 12))
         for key, label, callback in (
             ("overview", "⌂  项目概览", self.show_overview),
+            ("formal_baselines", "▤  四目标正式基线", self.show_formal_baselines),
             ("dataset", "▣  数据集", self.show_dataset),
             ("training", "◫  训练方案", self.show_training),
             ("results", "▤  实验结果", self.show_results),
@@ -507,6 +509,71 @@ class DesktopTrainingApp:
         tk.Label(header, text="最近一次 SOC 预测趋势", bg=COLORS["surface"], fg=COLORS["text"], font=("Microsoft YaHei UI", 11, "bold")).pack(side=tk.LEFT)
         ttk.Button(header, text="查看实验结果", style="Secondary.TButton", command=self.show_results).pack(side=tk.RIGHT)
         self._show_chart(chart_card, result.chart_path)
+
+    def show_formal_baselines(self) -> None:
+        """Show the archived four-target baselines without opening sample data."""
+        self._set_active_page("formal_baselines")
+        self._clear_content()
+        self._title("四目标正式基线", "只读查看已完成基线；打开或刷新不会重新运行训练。")
+        summary = load_formal_baselines(self.project_root)
+        if summary.status == "UNAVAILABLE":
+            card = self._card(self.content, 16, "#FFF7E6")
+            card.pack(fill=tk.X)
+            tk.Label(card, text="正式基线不可用", bg="#FFF7E6", fg=COLORS["warning"], font=("Microsoft YaHei UI", 12, "bold")).pack(anchor=tk.W)
+            tk.Label(card, text=summary.reason, bg="#FFF7E6", fg=COLORS["muted"], font=("Microsoft YaHei UI", 9)).pack(anchor=tk.W, pady=(5, 0))
+            return
+        for target in ("soc", "system_soe", "soh", "sot"):
+            baseline = summary.targets[target]
+            card = self._card(self.content, 14, COLORS["surface_soft"])
+            card.pack(fill=tk.X, pady=(0, 12))
+            header = tk.Frame(card, bg=COLORS["surface_soft"])
+            header.pack(fill=tk.X)
+            tk.Label(header, text=baseline.display_name, bg=COLORS["surface_soft"], fg=COLORS["text"], font=("Microsoft YaHei UI", 12, "bold")).pack(side=tk.LEFT)
+            tk.Label(header, text=baseline.status, bg=COLORS["surface_soft"], fg=COLORS["muted"], font=("Microsoft YaHei UI", 9)).pack(side=tk.RIGHT)
+            tk.Label(card, text=f"模型：{baseline.model}", bg=COLORS["surface_soft"], fg=COLORS["text"], font=("Microsoft YaHei UI", 9)).pack(anchor=tk.W, pady=(7, 0))
+            tk.Label(card, text=f"适用范围：{baseline.scope}", bg=COLORS["surface_soft"], fg=COLORS["muted"], font=("Microsoft YaHei UI", 9), wraplength=860, justify=tk.LEFT).pack(anchor=tk.W, pady=(4, 0))
+            metric_text = "；".join(f"{key}={value}" for key, value in baseline.metrics.items()) or "未提供指标"
+            tk.Label(card, text=f"核心指标：{metric_text}", bg=COLORS["surface_soft"], fg=COLORS["text"], font=("Microsoft YaHei UI", 9)).pack(anchor=tk.W, pady=(4, 0))
+            tk.Label(card, text=f"数据版本：{baseline.dataset_path or '不可用'}", bg=COLORS["surface_soft"], fg=COLORS["muted"], font=("Microsoft YaHei UI", 8), wraplength=860, justify=tk.LEFT).pack(anchor=tk.W, pady=(4, 0))
+            tk.Label(card, text=f"结果目录：{baseline.result_path or '不可用'}", bg=COLORS["surface_soft"], fg=COLORS["muted"], font=("Microsoft YaHei UI", 8), wraplength=860, justify=tk.LEFT).pack(anchor=tk.W, pady=(2, 0))
+            tk.Label(card, text=f"正式报告：{baseline.report_path or '未在归档摘要中提供'}", bg=COLORS["surface_soft"], fg=COLORS["muted"], font=("Microsoft YaHei UI", 8), wraplength=860, justify=tk.LEFT).pack(anchor=tk.W, pady=(2, 0))
+            if baseline.reason:
+                tk.Label(card, text=f"状态说明：{baseline.reason}", bg=COLORS["surface_soft"], fg=COLORS["warning"], font=("Microsoft YaHei UI", 9), wraplength=860, justify=tk.LEFT).pack(anchor=tk.W, pady=(4, 0))
+            actions = tk.Frame(card, bg=COLORS["surface_soft"])
+            actions.pack(anchor=tk.W, pady=(8, 0))
+            if baseline.report_path is not None:
+                ttk.Button(actions, text="打开报告", style="Secondary.TButton", command=lambda path=baseline.report_path: self._open_formal_path(path)).pack(side=tk.LEFT, padx=(0, 8))
+            if baseline.result_path is not None:
+                ttk.Button(actions, text="打开结果目录", style="Secondary.TButton", command=lambda path=baseline.result_path: self._open_formal_path(path)).pack(side=tk.LEFT, padx=(0, 8))
+            spec = build_formal_baseline_command(baseline, self.project_root)
+            if spec.available:
+                ttk.Button(actions, text="受控启动正式基线", style="Accent.TButton", command=lambda name=target: self._start_formal_baseline(name)).pack(side=tk.LEFT)
+            else:
+                tk.Label(actions, text=f"不可启动：{spec.reason}", bg=COLORS["surface_soft"], fg=COLORS["muted"], font=("Microsoft YaHei UI", 9)).pack(side=tk.LEFT)
+
+    @staticmethod
+    def _open_formal_path(path: Path) -> None:
+        if path.is_file() or path.is_dir():
+            os.startfile(str(path))
+
+    def _start_formal_baseline(self, target: str) -> None:
+        summary = load_formal_baselines(self.project_root)
+        baseline = summary.targets.get(target)
+        if baseline is None:
+            messagebox.showerror("无法启动", "正式基线条目不存在。")
+            return
+        spec = build_formal_baseline_command(baseline, self.project_root)
+        if not spec.available or spec.output_path is None:
+            messagebox.showwarning("无法启动", spec.reason)
+            return
+        if not messagebox.askyesno("确认启动", f"将使用已验证的固定入口启动 {baseline.display_name}，结果写入新目录：\n{spec.output_path}\n\n是否继续？"):
+            return
+        try:
+            self.controller.start(list(spec.command), spec.output_path, self.project_root)
+        except (FileNotFoundError, RuntimeError, ValueError) as error:
+            messagebox.showerror("启动失败", str(error))
+            return
+        messagebox.showinfo("已启动", f"已启动 {baseline.display_name} 受控运行。\n结果目录：{spec.output_path}")
 
     def show_dataset(self) -> None:
         self._set_active_page("dataset")
