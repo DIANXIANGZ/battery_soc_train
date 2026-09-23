@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import random
+import subprocess
 import sys
 import tkinter as tk
 from dataclasses import asdict
@@ -19,7 +20,7 @@ from src.desktop.charts import ensure_run_charts
 from src.desktop.chart_viewer import InteractiveChartViewer
 from src.desktop.multistate_charts import build_multistate_charts
 from src.desktop.hybrid_charts import build_hybrid_charts
-from src.desktop.formal_baselines import build_formal_baseline_command, load_formal_baselines
+from src.desktop.formal_baselines import FormalBaseline, FormalCommandSpec, build_formal_baseline_command, load_formal_baselines
 from src.desktop.theme import COLORS, configure_theme
 from src.desktop.training_controller import TrainingController, epoch_progress, smooth_progress_step
 from src.evaluation.nasa_lifecycle_experiments import result_dir_name
@@ -545,16 +546,39 @@ class DesktopTrainingApp:
                 ttk.Button(actions, text="打开报告", style="Secondary.TButton", command=lambda path=baseline.report_path: self._open_formal_path(path)).pack(side=tk.LEFT, padx=(0, 8))
             if baseline.result_path is not None:
                 ttk.Button(actions, text="打开结果目录", style="Secondary.TButton", command=lambda path=baseline.result_path: self._open_formal_path(path)).pack(side=tk.LEFT, padx=(0, 8))
-            spec = build_formal_baseline_command(baseline, self.project_root)
+            spec = self._formal_baseline_command(baseline)
             if spec.available:
                 ttk.Button(actions, text="受控启动正式基线", style="Accent.TButton", command=lambda name=target: self._start_formal_baseline(name)).pack(side=tk.LEFT)
             else:
                 tk.Label(actions, text=f"不可启动：{spec.reason}", bg=COLORS["surface_soft"], fg=COLORS["muted"], font=("Microsoft YaHei UI", 9)).pack(side=tk.LEFT)
 
     @staticmethod
-    def _open_formal_path(path: Path) -> None:
-        if path.is_file() or path.is_dir():
-            os.startfile(str(path))
+    def _open_formal_path(path: Path, *, platform_name: str | None = None) -> None:
+        if not path.is_file() and not path.is_dir():
+            messagebox.showwarning("路径不可用", f"路径不存在：\n{path}")
+            return
+        try:
+            platform_name = platform_name or sys.platform
+            if platform_name == "win32":
+                os.startfile(str(path))
+                return
+            opener = "open" if platform_name == "darwin" else "xdg-open"
+            result = subprocess.run([opener, str(path)], check=False)
+            if result.returncode != 0:
+                messagebox.showerror("无法打开", f"系统打开命令失败（exit {result.returncode}）：\n{path}")
+        except OSError as error:
+            messagebox.showerror("无法打开", f"无法打开路径：{error}")
+
+    def _formal_baseline_command(self, baseline: FormalBaseline) -> FormalCommandSpec:
+        try:
+            python_executable = resolve_training_python(self.project_root)
+        except FileNotFoundError as error:
+            return FormalCommandSpec(False, baseline.target, reason=f"训练解释器不可用：{error}")
+        return build_formal_baseline_command(
+            baseline,
+            self.project_root,
+            python_executable=python_executable,
+        )
 
     def _start_formal_baseline(self, target: str) -> None:
         summary = load_formal_baselines(self.project_root)
@@ -562,7 +586,7 @@ class DesktopTrainingApp:
         if baseline is None:
             messagebox.showerror("无法启动", "正式基线条目不存在。")
             return
-        spec = build_formal_baseline_command(baseline, self.project_root)
+        spec = self._formal_baseline_command(baseline)
         if not spec.available or spec.output_path is None:
             messagebox.showwarning("无法启动", spec.reason)
             return

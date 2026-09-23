@@ -2,14 +2,17 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import Mock, patch
 
 from src.desktop.formal_baselines import (
     build_formal_baseline_command,
     load_formal_baselines,
 )
+from src.desktop.app import DesktopTrainingApp
 
 
 def _sha256(path: Path) -> str:
@@ -54,6 +57,54 @@ def _write_summary(root: Path, *, result_exists: bool = False) -> dict:
 
 
 class FormalBaselineContractTests(unittest.TestCase):
+    def test_open_formal_path_uses_native_command_per_platform(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "report.md"
+            path.write_text("report", encoding="utf-8")
+            with patch("src.desktop.app.subprocess.run") as run:
+                run.return_value.returncode = 0
+                DesktopTrainingApp._open_formal_path(path, platform_name="darwin")
+                run.assert_called_once_with(["open", str(path)], check=False)
+            with patch("src.desktop.app.subprocess.run") as run:
+                run.return_value.returncode = 0
+                DesktopTrainingApp._open_formal_path(path, platform_name="linux")
+                run.assert_called_once_with(["xdg-open", str(path)], check=False)
+            with patch.object(os, "startfile", create=True) as startfile:
+                DesktopTrainingApp._open_formal_path(path, platform_name="win32")
+                startfile.assert_called_once_with(str(path))
+
+    def test_open_formal_path_reports_missing_path(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            missing = Path(temp_dir) / "missing"
+            with patch("src.desktop.app.messagebox.showwarning") as warning, patch("src.desktop.app.subprocess.run") as run:
+                DesktopTrainingApp._open_formal_path(missing, platform_name="darwin")
+                warning.assert_called_once()
+                run.assert_not_called()
+
+    def test_formal_start_uses_resolved_training_interpreter(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            _write_summary(root)
+            interpreter = root / "python"
+            interpreter.write_text("python", encoding="utf-8")
+            app = DesktopTrainingApp.create_for_test(root)
+            app.controller = Mock()
+            with patch("src.desktop.app.resolve_training_python", return_value=interpreter), patch("src.desktop.app.messagebox.askyesno", return_value=True), patch("src.desktop.app.messagebox.showinfo"):
+                app._start_formal_baseline("sot")
+            command = app.controller.start.call_args.args[0]
+            self.assertEqual(command[0], str(interpreter.resolve()))
+
+    def test_formal_start_fails_closed_when_interpreter_is_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            _write_summary(root)
+            app = DesktopTrainingApp.create_for_test(root)
+            app.controller = Mock()
+            with patch("src.desktop.app.resolve_training_python", side_effect=FileNotFoundError("missing")), patch("src.desktop.app.messagebox.showwarning") as warning:
+                app._start_formal_baseline("sot")
+            app.controller.start.assert_not_called()
+            self.assertIn("解释器", warning.call_args.args[1])
+
     def test_desktop_app_exposes_read_only_four_target_entry(self) -> None:
         source = (Path(__file__).resolve().parents[1] / "src" / "desktop" / "app.py").read_text(encoding="utf-8")
 
