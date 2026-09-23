@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "status": "FORMAL_FIXED_CONFIGURATION",
+  "target": "system_soe",
+  "scope": "community_storage_system_only_not_cell_level",
+  "dataset": {
+    "version": "system_soe-baseline-v1",
+    "path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/05_非RUL独立候选/system_soe-baseline-v1",
+    "source_id": "zenodo-8381142-v1.0",
+    "row_count": 26138,
+    "ready_sha256": "c18455709c3c7977e2c81ebcca95bf4d4de427f117d820a5f515fe44d2c6d6cf",
+    "manifest_sha256": "72c4cb27e018c8e6fc592fe924ef79316dd29b175a6f51c6d06bf39dc4570a90",
+    "samples_sha256": "d6abe22b5b3040bb39977263bfb40f1e2e77106f6e9ab7e600784513ee0b0e8e",
+    "source_files_sha256": "8e4ef51edcf3e74d1ab5cd2bc77a734b14335dd31b04f192a64995e3f35b1601"
+  },
+  "features": {
+    "names": ["SoC", "Ptcb", "Ptei"],
+    "current_row_only": true,
+    "label": "soe_source_value",
+    "label_unit": "unspecified_source_unit"
+  },
+  "split": {
+    "axis": "RequID",
+    "source": "dataset_manifest",
+    "train_groups": 238,
+    "test_groups": 60,
+    "train_rows": 21205,
+    "test_rows": 4933,
+    "validation": null,
+    "early_stopping": false
+  },
+  "preprocessing": {
+    "standardize": true,
+    "fit_scope": "training_groups_only"
+  },
+  "model": {
+    "class": "torch.nn.Linear",
+    "in_features": 3,
+    "out_features": 1,
+    "solver": "torch.linalg.lstsq",
+    "dtype": "float64",
+    "device": "cpu",
+    "seed": 42
+  },
+  "authorization": {
+    "smoke_flag": "--smoke-authorized",
+    "formal_flag": "--formal-authorized"
+  },
+  "execution": {
+    "smoke_path": "/private/tmp/system-soe-pytorch-smoke-20260922-v1",
+    "formal_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/03_模型与实验结果/08_系统SOE轻量基线/system_soe-baseline-v1/pytorch-linear-formal-v1",
+    "xgboost": false,
+    "dataset_modification": false,
+    "git": false
+  }
+}

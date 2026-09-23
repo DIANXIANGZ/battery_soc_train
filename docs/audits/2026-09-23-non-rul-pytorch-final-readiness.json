@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "archive_id": "non-rul-pytorch-final-readiness-2026-09-23",
+  "status": "COMPLETE_WITH_SCOPE_LIMITS",
+  "project_result": "THREE_TARGET_FORMAL_PASS_ONE_TARGET_BLOCKED",
+  "archive_action": "read-only evidence consolidation; no new training, data-version change, or Git action",
+  "tasks": {
+    "task_1_common_contract": "PASS",
+    "task_2_immutable_versioning": "PASS",
+    "task_3_sot": "BLOCKED_INVALIDATED",
+    "task_4_soc": "PYTORCH_FORMAL_PASS_SCOPED",
+    "task_5_soe": "SYSTEM_LEVEL_PYTORCH_FORMAL_PASS_SCOPED",
+    "task_6_soh": "PYTORCH_FORMAL_PASS_SCOPED",
+    "task_7_pytorch_entrypoint": "PASS",
+    "task_8_target_runs": "PARTIAL_PASS_SOC_SYSTEM_SOE_SOH; SOT_BLOCKED",
+    "task_9_final_archive": "COMPLETE_PENDING_INDEPENDENT_DOCUMENT_REVIEW"
+  },
+  "targets": {
+    "soc": {
+      "status": "PYTORCH_FORMAL_PASS_SCOPED",
+      "scope": "LGHG2_001 single seen cell; six complete-condition holdouts; no unseen-cell or cross-source claim",
+      "dataset_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/05_非RUL独立候选/soc-lightweight-condition-v1-2026-08-27/soc-baseline-v1",
+      "result_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/03_模型与实验结果/07_SOC轻量基线/soc-lightweight-condition-v1-2026-08-27/pytorch-linear-formal-v1",
+      "model": "torch.nn.Linear(4,1) closed-form ridge",
+      "test_rows": 411135,
+      "macro_mae": 0.00000305958233824622,
+      "macro_rmse": 0.000003850856181081782,
+      "report_path": "docs/audits/2026-09-22-soc-pytorch-linear-formal-summary.md",
+      "report_sha256": "16ee7033b79a4ebe094290b36bd4b30fa9281f247da6c57256053af8ade5405f"
+    },
+    "system_soe": {
+      "status": "PYTORCH_FORMAL_PASS_SCOPED",
+      "scope": "Zenodo 8381142 community storage system only; not cell-level or unseen-cell generalization",
+      "label": "soe_source_value",
+      "label_unit": "unspecified_source_unit",
+      "dataset_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/05_非RUL独立候选/system_soe-baseline-v1",
+      "result_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/03_模型与实验结果/08_系统SOE轻量基线/system_soe-baseline-v1/pytorch-linear-formal-v1",
+      "model": "torch.nn.Linear(3,1) least squares",
+      "train_rows": 21205,
+      "test_rows": 4933,
+      "train_groups": 238,
+      "test_groups": 60,
+      "mae": 13.538709044079217,
+      "rmse": 16.552627288336616,
+      "report_path": "docs/audits/2026-09-23-system-soe-pytorch-formal-training.md",
+      "report_sha256": "ec69e9a5e86a1f88096c52500044b582882bdd2d83fd15c7875ac9cea16f17d0"
+    },
+    "soh": {
+      "status": "PYTORCH_FORMAL_PASS_SCOPED",
+      "scope": "UNIBO_CALIBRATION_CELL_001 single calibration cell trend fit only; no cross-cell claim",
+      "dataset_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/05_非RUL独立候选/soh-single-cell-calibration-v1-2026-09-04/soh-baseline-v1",
+      "result_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/03_模型与实验结果/09_SOH单电芯小样本基线/soh-single-cell-calibration-v1-2026-09-04/pytorch-linear-v1-formal-2026-09-20-v3",
+      "model": "torch.nn.Linear(1,1) SGD",
+      "train_rows": 17,
+      "test_rows": 4,
+      "test_mae": 0.003233805298805237,
+      "test_rmse": 0.0032712346874177456,
+      "report_path": "docs/audits/2026-09-20-plan-a-execution-summary.md",
+      "report_sha256": "4b8c6341ffcb21681e5ac750d68a5861e1c3263d39476370c96d022c5c9a92c5"
+    },
+    "sot": {
+      "status": "BLOCKED_INVALIDATED",
+      "reason": "no accepted training rows under the retained pointwise temperature data gate",
+      "version_path": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/05_非RUL独立候选/sot-pointwise-temperature-v1/sot-baseline-v1",
+      "invalidated_sha256": "044f70f2459361409fe42582ce09364a7369c3497db2c155e0d0044005365eef",
+      "ready_created": false
+    },
+    "energy_proxy": {
+      "status": "FORMAL_PASS_SUPPLEMENTAL",
+      "native_soe": false,
+      "label": "discharge_energy_wh_cumulative",
+      "note": "retained supplemental result; not substituted for system_soe"
+    },
+    "rul": {
+      "status": "FROZEN",
+      "read_or_mixed_by_archive": false
+    }
+  },
+  "global_safety": {
+    "archive_action_ran_training": false,
+    "archive_action_modified_data_version": false,
+    "archive_action_read_rul_or_frozen_assets": false,
+    "archive_action_performed_git": false,
+    "historical_documents_overwritten": false
+  },
+  "remaining_work": {
+    "required_for_current_scoped_baseline": [],
+    "optional": [
+      "obtain a new SOT source or redesign SOT only if four-target completeness is required",
+      "hand tested changes to the Git administrator after chief-engineer approval"
+    ]
+  }
+}

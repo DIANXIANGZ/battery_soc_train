@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "target": "system_soe",
+  "source": {
+    "source_id": "zenodo-8381142-v1.0",
+    "record_id": "8381142",
+    "doi": "10.5281/zenodo.8381142",
+    "version": "1.0",
+    "license": "CC BY 4.0",
+    "file_name": "UC Setting Data.csv",
+    "source_csv": "/Users/wanghaoming/Public/battery_soc_project/battery_soc_project/.source_quarantine/2026-09-22/soe_zenodo_8381142_v1/UC Setting Data.csv",
+    "size_bytes": 5778187,
+    "md5": "5989bfac08cde0843acb53382b0abea7",
+    "sha256": "1069010d122e2100b9edd427c070899374fd941e500e45efba222bb61d6e6475"
+  },
+  "scope": "community_storage_system_only_not_cell_level",
+  "identity": {
+    "group_field": "RequID",
+    "cell_id_marker": "CBES_SYSTEM_NOT_CELL",
+    "cell_id_semantics": "constant system marker; not a physical cell ID",
+    "session_id_semantics": "source RequID group; not a time-series session",
+    "cycle_index_semantics": "zero-based source data-row ordinal; not a cycle"
+  },
+  "label": {
+    "name": "soe_source_value",
+    "source_field": "SoE",
+    "unit": "unspecified_source_unit",
+    "unit_conversion": null
+  },
+  "features": {
+    "source_fields": ["SoC", "Ptcb", "Ptei"],
+    "time_field": "Submission",
+    "time_is_feature": false,
+    "allowlist_only": true
+  },
+  "split": {
+    "axis": "RequID",
+    "policy": "earliest_submission_utc_then_requid; train=floor(0.8*n); remainder=test",
+    "train_fraction": 0.8,
+    "validation": null,
+    "early_stopping": false
+  },
+  "expected_source_summary": {
+    "raw_data_row_count": 28740,
+    "unique_requid_count": 313,
+    "accepted_row_count": 26138,
+    "accepted_group_count": 298,
+    "soe_missing_count": 0,
+    "soe_non_numeric_count": 0,
+    "soe_min": 0.22,
+    "soe_max": 864.6
+  },
+  "dataset": {
+    "output_root": "/Users/wanghaoming/Public/SOC电池数据中心/SOC电池数据中心/02_训练数据/05_非RUL独立候选",
+    "version_name": "system_soe-baseline-v1",
+    "rollback_policy": "immutable atomic no-replace publication; preserve all prior versions; failure produces only INVALIDATED"
+  },
+  "training": {
+    "enabled": false,
+    "formal_training_authorized": false
+  }
+}

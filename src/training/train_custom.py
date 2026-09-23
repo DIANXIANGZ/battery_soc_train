@@ -17,6 +17,7 @@ from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
 
 from src.custom_training.algorithms import algorithm_keys
+from src.custom_training.admission import validate_pytorch_entrypoint
 from src.custom_training.capability import verify_registry_capability
 from src.training.battery_protocol import acceptance, audit_split, nested_group_folds, target_acceptance
 
@@ -250,12 +251,20 @@ def run_training(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data", type=Path, required=True)
-    parser.add_argument("--results-dir", type=Path, required=True)
-    parser.add_argument("--admission-registry", type=Path, required=True)
-    parser.add_argument("--project-id", required=True)
-    parser.add_argument("--features", nargs="+", required=True)
-    parser.add_argument("--targets", nargs="+", required=True)
+    parser.add_argument("--data", type=Path)
+    parser.add_argument("--results-dir", type=Path)
+    parser.add_argument("--admission-registry", type=Path)
+    parser.add_argument("--project-id")
+    parser.add_argument("--manifest", type=Path)
+    parser.add_argument("--ready", type=Path)
+    parser.add_argument("--config", type=Path)
+    parser.add_argument("--config-sha256")
+    parser.add_argument("--target")
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--formal", action="store_true")
+    parser.add_argument("--formal-training-authorized", action="store_true")
+    parser.add_argument("--features", nargs="+")
+    parser.add_argument("--targets", nargs="+")
     parser.add_argument("--algorithm", choices=SUPPORTED_ALGORITHMS, default="lstm")
     parser.add_argument("--window", type=int, default=60)
     parser.add_argument("--epochs", type=int, default=40)
@@ -264,6 +273,35 @@ def main() -> None:
     parser.add_argument("--learning-rate", type=float, default=3e-4)
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
+    version_entrypoint_args = (args.manifest, args.ready, args.config)
+    if args.dry_run or any(value is not None for value in version_entrypoint_args):
+        if not all(value is not None for value in version_entrypoint_args):
+            parser.error("PyTorch版本入口需要 --manifest、--ready 和 --config。")
+        if not args.target:
+            parser.error("PyTorch版本入口需要 --target。")
+        if args.formal and args.dry_run:
+            parser.error("--dry-run 与 --formal 不能同时使用。")
+        try:
+            result = validate_pytorch_entrypoint(
+                args.manifest,
+                args.ready,
+                args.config,
+                target=args.target,
+                algorithm=args.algorithm,
+                config_sha256=args.config_sha256,
+                formal=args.formal,
+                formal_training_authorized=args.formal_training_authorized,
+            )
+        except (KeyError, OSError, TypeError, ValueError, json.JSONDecodeError) as error:
+            parser.error(f"PyTorch版本入口门禁阻塞：{error}")
+        if args.dry_run:
+            print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+            return
+        parser.error("正式版本训练必须由受控训练调度器启动。")
+    if args.admission_registry is None or args.project_id is None:
+        parser.error("传统自定义训练入口需要 --admission-registry 和 --project-id。")
+    if args.data is None or args.results_dir is None or not args.features or not args.targets:
+        parser.error("传统自定义训练入口需要 --data、--results-dir、--features 和 --targets。")
     try:
         capability = verify_registry_capability(
             args.admission_registry,
