@@ -3,6 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from hashlib import sha256
+import json
+from pathlib import Path
+import re
 
 from src.custom_training.algorithms import ALGORITHM_REGISTRY
 from src.custom_training.dataset import CustomDatasetConfig
@@ -12,6 +16,9 @@ BATTERY_TARGETS = frozenset({
     "soc", "soe", "soh", "sot", "sot_c", "sot_5min_c", "rul", "rul_cycles",
 })
 MINIMUM_EXACT_RUL_CELLS = 6
+PYTORCH_TARGETS = frozenset({"soc", "soe", "soh", "sot"})
+PYTORCH_ALGORITHMS = frozenset({"lstm", "gru", "transformer"})
+_FORBIDDEN_VERSION_TOKENS = ("rul", "eol", "trajectory", "lifecycle")
 
 
 def _manifest_integer(
@@ -41,6 +48,153 @@ class CustomTrainingAdmission:
     training_allowed: bool
     generalization_level: str
     targets: tuple[TargetAdmission, ...]
+
+
+def _sha256_file(path: Path) -> str:
+    digest = sha256()
+    with Path(path).open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _require_sha256(value: object, field: str) -> str:
+    if not isinstance(value, str) or re.fullmatch(r"[0-9a-fA-F]{64}", value) is None:
+        raise ValueError(f"{field}_fingerprint_invalid")
+    return value.lower()
+
+
+def _load_json(path: Path, field: str) -> dict[str, object]:
+    try:
+        value = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise ValueError(f"{field}_invalid") from error
+    if not isinstance(value, dict):
+        raise ValueError(f"{field}_invalid")
+    return value
+
+
+def _forbidden_version_field(
+    value: object,
+    location: str = "manifest",
+    field_name: str | None = None,
+) -> str | None:
+    """Return the first RUL/lifecycle semantic field found in version evidence."""
+    if isinstance(value, dict):
+        for key, item in value.items():
+            key_text = str(key).lower()
+            key_tokens = set(re.findall(r"[a-z]+", key_text))
+            if key_tokens.intersection(_FORBIDDEN_VERSION_TOKENS):
+                return f"{location}.{key}"
+            found = _forbidden_version_field(item, f"{location}.{key}", key_text)
+            if found:
+                return found
+    elif isinstance(value, (list, tuple)):
+        for index, item in enumerate(value):
+            found = _forbidden_version_field(item, f"{location}[{index}]", field_name)
+            if found:
+                return found
+    elif isinstance(value, str):
+        # Filesystem paths may contain the project directory name ``non_rul``;
+        # only semantic values are scanned, never path-bearing fields.
+        if field_name and "path" in field_name:
+            return None
+        semantic_value = re.sub(r"non[_-]?rul", "", value.lower())
+        tokens = set(re.findall(r"[a-z]+", semantic_value))
+        if tokens.intersection(_FORBIDDEN_VERSION_TOKENS):
+            return location
+    return None
+
+
+def validate_pytorch_entrypoint(
+    manifest_path: Path,
+    ready_path: Path,
+    config_path: Path,
+    *,
+    target: str,
+    algorithm: str,
+    config_sha256: str | None,
+    formal: bool = False,
+    formal_training_authorized: bool = False,
+) -> dict[str, object]:
+    """Validate a version-bound PyTorch dry-run without reading samples or training."""
+    normalized_target = str(target).strip().lower()
+    if normalized_target not in PYTORCH_TARGETS:
+        raise ValueError("unsupported_target")
+    normalized_algorithm = str(algorithm).strip().lower()
+    if normalized_algorithm not in PYTORCH_ALGORITHMS:
+        raise ValueError("pytorch_algorithm_required")
+    if formal and not formal_training_authorized:
+        raise ValueError("formal_training_not_authorized")
+
+    manifest_file = Path(manifest_path).resolve()
+    ready_file = Path(ready_path).resolve()
+    config_file = Path(config_path).resolve()
+    if ready_file.parent != manifest_file.parent:
+        raise ValueError("version_evidence_directory_mismatch")
+    if (manifest_file.parent / "INVALIDATED.json").exists():
+        raise ValueError("dataset_invalidated")
+    for path, field in ((manifest_file, "manifest"), (ready_file, "ready"), (config_file, "config")):
+        if not path.is_file():
+            raise ValueError(f"{field}_missing")
+
+    manifest = _load_json(manifest_file, "manifest")
+    ready = _load_json(ready_file, "ready")
+    config = _load_json(config_file, "config")
+    forbidden = _forbidden_version_field(manifest)
+    if forbidden:
+        raise ValueError(f"forbidden_version_field:{forbidden}")
+
+    manifest_target = manifest.get("target")
+    if not isinstance(manifest_target, str) or manifest_target.strip().lower() != normalized_target:
+        raise ValueError("target_mismatch")
+    version = manifest.get("version")
+    if not isinstance(version, str) or not version.strip():
+        raise ValueError("manifest_version_missing")
+    manifest_sha = _require_sha256(ready.get("manifest_sha256"), "manifest")
+    actual_manifest_sha = _sha256_file(manifest_file)
+    if manifest_sha != actual_manifest_sha:
+        raise ValueError("manifest_fingerprint_mismatch")
+
+    ready_sha = _require_sha256(config.get("dataset", {}).get("ready_sha256") if isinstance(config.get("dataset"), dict) else None, "ready")
+    actual_ready_sha = _sha256_file(ready_file)
+    if ready_sha != actual_ready_sha:
+        raise ValueError("ready_fingerprint_mismatch")
+    requested_config_sha = _require_sha256(config_sha256, "config")
+    actual_config_sha = _sha256_file(config_file)
+    if requested_config_sha != actual_config_sha:
+        raise ValueError("config_fingerprint_mismatch")
+
+    config_target = config.get("target")
+    if not isinstance(config_target, str) or config_target.strip().lower() != normalized_target:
+        raise ValueError("config_target_mismatch")
+    config_algorithm = config.get("algorithm")
+    if config_algorithm is None and isinstance(config.get("model"), dict):
+        config_algorithm = config["model"].get("algorithm")
+    if not isinstance(config_algorithm, str) or config_algorithm.strip().lower() != normalized_algorithm:
+        raise ValueError("config_algorithm_mismatch")
+    dataset = config.get("dataset")
+    if not isinstance(dataset, dict):
+        raise ValueError("config_dataset_missing")
+    configured_path = dataset.get("path")
+    if not isinstance(configured_path, str) or Path(configured_path).resolve() != manifest_file.parent:
+        raise ValueError("config_dataset_path_mismatch")
+    configured_manifest_sha = _require_sha256(dataset.get("manifest_sha256"), "manifest")
+    if configured_manifest_sha != actual_manifest_sha:
+        raise ValueError("config_manifest_fingerprint_mismatch")
+    forbidden_config = _forbidden_version_field(config)
+    if forbidden_config:
+        raise ValueError(f"forbidden_config_field:{forbidden_config}")
+    return {
+        "status": "DRY_RUN_READY",
+        "target": normalized_target,
+        "algorithm": normalized_algorithm,
+        "version": version,
+        "manifest_sha256": actual_manifest_sha,
+        "ready_sha256": actual_ready_sha,
+        "config_sha256": actual_config_sha,
+        "formal_training_authorized": bool(formal_training_authorized),
+    }
 
 
 def assess_custom_training(
