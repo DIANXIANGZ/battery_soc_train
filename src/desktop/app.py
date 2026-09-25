@@ -83,6 +83,8 @@ class DesktopTrainingApp:
         self._content_window: int | None = None
         self._images: list[tk.PhotoImage] = []
         self._nav_buttons: dict[str, ttk.Button] = {}
+        self._scroll_binding_tokens: dict[str, str] = {}
+        self._scroll_delta_remainder = 0.0
         self._message = "正在读取数据中心配置。"
         self._load_configuration()
         if self.root is not None:
@@ -192,7 +194,7 @@ class DesktopTrainingApp:
         self._content_window = self.content_canvas.create_window((0, 0), window=self.content, anchor=tk.NW)
         self.content.bind("<Configure>", self._update_content_scroll_region)
         self.content_canvas.bind("<Configure>", self._resize_content_width)
-        main.bind_all("<MouseWheel>", self._on_content_mouse_wheel, add="+")
+        self._bind_content_scrolling()
 
         tk.Label(navigation, text="SOC", bg=COLORS["sidebar"], fg=COLORS["sidebar_text"], font=("Microsoft YaHei UI", 20, "bold")).pack(anchor=tk.W, padx=24, pady=(32, 0))
         tk.Label(navigation, text="TRAINING LAB", bg=COLORS["sidebar"], fg=COLORS["sidebar_muted"], font=("Microsoft YaHei UI", 9, "bold")).pack(anchor=tk.W, padx=24, pady=(2, 32))
@@ -330,6 +332,7 @@ class DesktopTrainingApp:
 
     def _clear_content(self) -> None:
         self._images = []
+        self._scroll_delta_remainder = 0.0
         for child in self.content.winfo_children():
             child.destroy()
         if self.content_canvas is not None:
@@ -356,11 +359,96 @@ class DesktopTrainingApp:
                 return False
         return False
 
-    def _on_content_mouse_wheel(self, event: tk.Event) -> None:
-        if self.content_canvas is None or not self._is_content_widget(event.widget):
+    def _bind_content_scrolling(self) -> None:
+        """Bind page scrolling once for mouse wheels and macOS trackpads."""
+
+        if self.root is None or self._scroll_binding_tokens:
             return
-        steps = -1 if event.delta > 0 else 1
+        for sequence in ("<MouseWheel>", "<Button-4>", "<Button-5>"):
+            self._scroll_binding_tokens[sequence] = self.root.bind_all(
+                sequence, self._on_content_mouse_wheel, add="+"
+            )
+        self.root.bind("<Destroy>", self._on_root_destroy, add="+")
+
+    def _unbind_content_scrolling(self) -> None:
+        if self.root is None:
+            self._scroll_binding_tokens.clear()
+            return
+        for sequence in tuple(self._scroll_binding_tokens):
+            try:
+                funcid = self._scroll_binding_tokens[sequence]
+                unbind = getattr(self.root, "_unbind", None)
+                if callable(unbind):
+                    unbind(("bind", "all", sequence), funcid)
+            except tk.TclError:
+                pass
+        self._scroll_binding_tokens.clear()
+        self._scroll_delta_remainder = 0.0
+
+    def _on_root_destroy(self, event: tk.Event) -> None:
+        if self.root is not None and event.widget is self.root:
+            self._unbind_content_scrolling()
+
+    @staticmethod
+    def _scroll_priority_widget(widget: tk.Misc | None) -> bool:
+        """Keep native scrolling controls ahead of the page container."""
+
+        priority_classes = {
+            "Text", "Listbox", "TListbox", "TCombobox", "Combobox",
+            "Spinbox", "TSpinbox", "Treeview",
+        }
+        current = widget
+        while current is not None:
+            try:
+                if current.winfo_class() in priority_classes:
+                    return True
+                parent_name = current.winfo_parent()
+                if not parent_name:
+                    return False
+                current = current.nametowidget(parent_name)
+            except (KeyError, tk.TclError, AttributeError):
+                return False
+        return False
+
+    def _wheel_units(self, event: tk.Event, platform_name: str) -> int:
+        number = getattr(event, "num", None)
+        if number == 4:
+            self._scroll_delta_remainder = 0.0
+            return -1
+        if number == 5:
+            self._scroll_delta_remainder = 0.0
+            return 1
+        try:
+            delta = float(getattr(event, "delta", 0) or 0)
+        except (TypeError, ValueError):
+            return 0
+        if delta == 0:
+            return 0
+        # Windows reports 120 units per wheel notch; macOS trackpads report
+        # small, continuous deltas, so retain the fractional remainder.
+        signed_units = -delta / 120.0 if platform_name == "win32" else -delta
+        total = self._scroll_delta_remainder + signed_units
+        whole = int(total)
+        self._scroll_delta_remainder = total - whole
+        return whole
+
+    def _on_content_mouse_wheel(self, event: tk.Event, *, platform_name: str | None = None) -> str | None:
+        if self.content_canvas is None or not self._is_content_widget(getattr(event, "widget", None)):
+            return None
+        if self._scroll_priority_widget(getattr(event, "widget", None)):
+            return None
+        steps = self._wheel_units(event, platform_name or sys.platform)
+        if steps == 0:
+            return None
+        first, last = self.content_canvas.yview()
+        if last - first >= 1.0:
+            return None
+        if steps < 0 and first <= 0.0:
+            return None
+        if steps > 0 and last >= 1.0:
+            return None
         self.content_canvas.yview_scroll(steps, "units")
+        return "break"
 
     @staticmethod
     def _widget_exists(widget: tk.Misc | None) -> bool:
